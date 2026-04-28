@@ -3,6 +3,7 @@ import logo from "@assets/Markaz_Rabithah_Logo_1_1777345170344.png";
 import logoMark from "@assets/Logo_Markaz_Rabithah_2_1777345186295.png";
 import logoOnCrimson from "@assets/Logo_Markaz_Rabithah_on_crimson_1777348637704.png";
 import logoOnIvory from "@assets/Logo_Markaz_Rabithah_on_ivory_1777348637704.png";
+import heroPortrait from "@/assets/hero-portrait.png";
 import { useReveal } from "@/hooks/use-reveal";
 
 // ---- Scroll progress bar ----------------------------------------------------
@@ -360,28 +361,55 @@ const Nav = () => {
 
         <button
           aria-label="Menu"
+          aria-expanded={open}
           onClick={() => setOpen(!open)}
-          className="md:hidden text-ivory p-1.5"
+          className="md:hidden text-ivory p-1.5 relative w-7 h-7 flex items-center justify-center"
         >
-          <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2">
-            {open ? (
-              <path d="M6 6l12 12M6 18L18 6" strokeLinecap="round" />
-            ) : (
-              <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
-            )}
-          </svg>
+          {/* animated hamburger -> X */}
+          <span
+            aria-hidden
+            className={`absolute h-[2px] w-5 bg-current rounded-full transition-all duration-300 ease-[cubic-bezier(0.65,0,0.35,1)] ${
+              open ? "rotate-45 translate-y-0" : "-translate-y-[6px]"
+            }`}
+          />
+          <span
+            aria-hidden
+            className={`absolute h-[2px] w-5 bg-current rounded-full transition-all duration-200 ease-out ${
+              open ? "opacity-0 scale-x-0" : "opacity-100 scale-x-100"
+            }`}
+          />
+          <span
+            aria-hidden
+            className={`absolute h-[2px] w-5 bg-current rounded-full transition-all duration-300 ease-[cubic-bezier(0.65,0,0.35,1)] ${
+              open ? "-rotate-45 translate-y-0" : "translate-y-[6px]"
+            }`}
+          />
         </button>
       </div>
 
-      {open && (
-        <div className="md:hidden mt-2 mx-auto max-w-5xl bg-background/95 backdrop-blur-xl border border-ivory/15 rounded-2xl shadow-elegant overflow-hidden">
+      {/* Mobile menu — animated open/close (always rendered for transitions) */}
+      <div
+        className={`md:hidden mt-2 mx-auto max-w-5xl overflow-hidden transition-[max-height,opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          open
+            ? "max-h-[420px] opacity-100 translate-y-0"
+            : "max-h-0 opacity-0 -translate-y-2 pointer-events-none"
+        }`}
+      >
+        <div
+          className={`bg-background/95 backdrop-blur-xl border border-ivory/15 rounded-2xl shadow-elegant overflow-hidden transition-transform duration-500 ${
+            open ? "scale-100" : "scale-[0.98]"
+          }`}
+        >
           <div className="px-5 py-4 flex flex-col gap-3">
-            {links.map((l) => (
+            {links.map((l, i) => (
               <a
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className="text-sm uppercase tracking-[0.2em] text-ivory/80 hover:text-primary"
+                className={`text-sm uppercase tracking-[0.2em] text-ivory/80 hover:text-primary transition-all duration-500 ease-out ${
+                  open ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2"
+                }`}
+                style={{ transitionDelay: open ? `${80 + i * 55}ms` : "0ms" }}
               >
                 {l.label}
               </a>
@@ -389,13 +417,18 @@ const Nav = () => {
             <a
               href="#kontak"
               onClick={() => setOpen(false)}
-              className="mt-1 text-sm text-center uppercase tracking-[0.2em] px-4 py-3 bg-primary text-ivory rounded-full font-semibold"
+              className={`mt-1 text-sm text-center uppercase tracking-[0.2em] px-4 py-3 bg-primary text-ivory rounded-full font-semibold transition-all duration-500 ease-out ${
+                open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+              }`}
+              style={{
+                transitionDelay: open ? `${80 + links.length * 55}ms` : "0ms",
+              }}
             >
               Daftar
             </a>
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 };
@@ -518,28 +551,36 @@ const Index = () => {
 
       {/* LOGO HERO (splash) ================================================ */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-4 md:px-6 overflow-hidden">
+        {/* Background portrait — sits behind the logo, anchored to bottom */}
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 top-0 flex items-end justify-center pointer-events-none"
+        >
+          <img
+            src={heroPortrait}
+            alt=""
+            className="h-[88%] md:h-[95%] w-auto object-contain object-bottom opacity-70 md:opacity-75 select-none animate-float-slow"
+            style={{
+              filter:
+                "drop-shadow(0 30px 60px rgba(0,0,0,0.55)) drop-shadow(0 0 80px rgba(178,34,34,0.18))",
+              maskImage:
+                "linear-gradient(180deg, transparent 0%, #000 18%, #000 88%, transparent 100%)",
+              WebkitMaskImage:
+                "linear-gradient(180deg, transparent 0%, #000 18%, #000 88%, transparent 100%)",
+            }}
+          />
+        </div>
+        {/* Subtle vignette over portrait so foreground content stays readable */}
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 70% 60% at 50% 50%, transparent 35%, hsl(215 80% 7% / 0.55) 80%, hsl(215 80% 6% / 0.85) 100%)",
+          }}
+        />
+
         <div className="reveal relative w-[260px] md:w-full md:max-w-md mx-auto aspect-square flex items-center justify-center animate-float">
-          {/* Outer slow-spinning ring */}
-          <div
-            aria-hidden
-            className="absolute inset-[8%] rounded-full border border-ivory/10 animate-spin-slow"
-            style={{ borderTopColor: "hsl(var(--crimson) / 0.5)" }}
-          />
-          <div
-            aria-hidden
-            className="absolute inset-[18%] rounded-full border border-ivory/5 animate-spin-slow"
-            style={{ animationDirection: "reverse", animationDuration: "60s" }}
-          />
-          {/* Pulsing crimson ring */}
-          <div
-            aria-hidden
-            className="absolute inset-[24%] rounded-full border border-primary/40 animate-ping-ring"
-          />
-          <div
-            aria-hidden
-            className="absolute inset-[24%] rounded-full border border-primary/30 animate-ping-ring"
-            style={{ animationDelay: "-1.3s" }}
-          />
           {/* Aurora glow behind logo */}
           <div
             aria-hidden
@@ -554,7 +595,7 @@ const Index = () => {
         </div>
 
         {/* arabic name beneath */}
-        <div className="mt-6 md:mt-8 text-center reveal" style={{ transitionDelay: "300ms" }}>
+        <div className="relative mt-6 md:mt-8 text-center reveal" style={{ transitionDelay: "300ms" }}>
           <div className="font-arabic text-2xl md:text-4xl text-ivory/70 leading-none flex items-baseline justify-center gap-1" dir="rtl">
             <span>مركز الرابطة</span>
             <span aria-hidden className="inline-block w-[2px] h-6 md:h-8 bg-primary animate-caret-blink translate-y-1" />
