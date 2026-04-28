@@ -255,11 +255,8 @@ const Index = () => {
 
         {/* arabic name beneath */}
         <div className="absolute bottom-16 md:bottom-24 left-1/2 -translate-x-1/2 text-center">
-          <div className="font-arabic text-2xl md:text-4xl text-ivory/70 leading-none mb-2" dir="rtl">
+          <div className="font-arabic text-2xl md:text-4xl text-ivory/70 leading-none" dir="rtl">
             مركز الرابطة
-          </div>
-          <div className="text-[0.55rem] md:text-[0.65rem] uppercase tracking-[0.4em] text-ivory/40">
-            Mahad Persiapan Al-Azhar
           </div>
         </div>
 
@@ -290,11 +287,6 @@ const Index = () => {
 
         <div className="container-brand max-w-6xl mx-auto relative grid md:grid-cols-12 gap-8 md:gap-16 items-center">
           <div className="md:col-span-7">
-            <div className="reveal flex items-center gap-3 mb-4 md:mb-6 text-[0.65rem] md:text-xs uppercase tracking-[0.35em] text-ivory/70">
-              <span className="w-6 md:w-8 h-px bg-primary" />
-              Mahad Persiapan Al-Azhar
-            </div>
-
             <h1 className="reveal font-display font-extrabold text-3xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight mb-4 md:mb-6">
               <span className="block text-ivory">Kokoh ilmunya,</span>
               <span className="block text-ivory">terjaga hafalannya,</span>
