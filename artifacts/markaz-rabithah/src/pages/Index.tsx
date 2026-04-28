@@ -18,6 +18,96 @@ const Eyebrow = ({
   </div>
 );
 
+const CopyIcon = ({ className = "" }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    aria-hidden="true"
+  >
+    <rect x="9" y="9" width="13" height="13" rx="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const CheckIcon = ({ className = "" }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    aria-hidden="true"
+  >
+    <path d="M5 12l5 5L20 7" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const ColorSwatch = ({
+  name,
+  hex,
+  bg,
+  textClass,
+}: {
+  name: string;
+  hex: string;
+  bg: string;
+  textClass: string;
+}) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(hex);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1400);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = hex;
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand("copy");
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1400);
+      } finally {
+        document.body.removeChild(ta);
+      }
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleCopy}
+      aria-label={`Copy ${hex}`}
+      className={`group relative p-2.5 md:p-4 h-16 md:h-24 flex flex-col justify-between text-left w-full cursor-pointer transition-transform active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-primary/60 ${textClass}`}
+      style={{ backgroundColor: bg }}
+    >
+      <div className="flex items-center justify-between">
+        <div className="text-[0.5rem] md:text-[0.6rem] uppercase tracking-wider opacity-70">
+          Brand
+        </div>
+        <div className="opacity-50 group-hover:opacity-100 transition-opacity">
+          {copied ? (
+            <CheckIcon className="w-3 h-3 md:w-3.5 md:h-3.5" />
+          ) : (
+            <CopyIcon className="w-3 h-3 md:w-3.5 md:h-3.5" />
+          )}
+        </div>
+      </div>
+      <div>
+        <div className="font-display font-bold text-xs md:text-base">{name}</div>
+        <div className="text-[0.6rem] md:text-xs mt-0.5 md:mt-1 opacity-80 font-mono">
+          {copied ? "Copied!" : hex}
+        </div>
+      </div>
+    </button>
+  );
+};
+
 const PlusMark = ({ className = "" }: { className?: string }) => (
   <svg
     viewBox="0 0 24 24"
@@ -606,28 +696,27 @@ const Index = () => {
 
           {/* color palette */}
           <div className="reveal mb-6 md:mb-10">
-            <div className="text-[0.6rem] md:text-xs uppercase tracking-[0.3em] text-ivory/60 mb-3 md:mb-5">
-              Palet Warna
+            <div className="flex items-center justify-between mb-3 md:mb-5">
+              <div className="text-[0.6rem] md:text-xs uppercase tracking-[0.3em] text-ivory/60">
+                Palet Warna
+              </div>
+              <div className="text-[0.55rem] md:text-[0.65rem] uppercase tracking-[0.25em] text-ivory/40">
+                Klik untuk salin
+              </div>
             </div>
             <div className="grid grid-cols-3 gap-2 md:gap-4">
               {[
-                { name: "Deep Navy", hex: "#0A1D37", c: "#0A1D37", text: "text-ivory" },
-                { name: "Crimson Tarbush", hex: "#B22222", c: "#B22222", text: "text-ivory" },
-                { name: "Ivory", hex: "#F4EEE4", c: "#F4EEE4", text: "text-navy-deep" },
+                { name: "Deep Navy", hex: "#0A1D37", text: "text-ivory" },
+                { name: "Crimson Tarbush", hex: "#B22222", text: "text-ivory" },
+                { name: "Ivory", hex: "#F4EEE4", text: "text-navy-deep" },
               ].map((c) => (
-                <div
+                <ColorSwatch
                   key={c.name}
-                  className={`p-2.5 md:p-4 h-16 md:h-24 flex flex-col justify-between ${c.text}`}
-                  style={{ backgroundColor: c.c }}
-                >
-                  <div className="text-[0.5rem] md:text-[0.6rem] uppercase tracking-wider opacity-70">
-                    Brand
-                  </div>
-                  <div>
-                    <div className="font-display font-bold text-xs md:text-base">{c.name}</div>
-                    <div className="text-[0.6rem] md:text-xs mt-0.5 md:mt-1 opacity-80">{c.hex}</div>
-                  </div>
-                </div>
+                  name={c.name}
+                  hex={c.hex}
+                  bg={c.hex}
+                  textClass={c.text}
+                />
               ))}
             </div>
           </div>
