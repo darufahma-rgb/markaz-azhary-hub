@@ -1,4 +1,5 @@
 import logo from "@/assets/logo-markaz-rabithah.png";
+import logoMark from "@assets/Markaz_Rabithah_Logo_1_1777342798764.png";
 import { useReveal } from "@/hooks/use-reveal";
 
 // ---- Section header ---------------------------------------------------------
@@ -188,7 +189,7 @@ const Index = () => {
                 </svg>
               </div>
               <img
-                src={logo}
+                src={logoMark}
                 alt="Logo on grid"
                 className="relative z-10 w-3/5 h-auto"
               />
