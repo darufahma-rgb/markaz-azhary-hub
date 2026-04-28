@@ -1,9 +1,101 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import logo from "@assets/Markaz_Rabithah_Logo_1_1777345170344.png";
 import logoMark from "@assets/Logo_Markaz_Rabithah_2_1777345186295.png";
 import logoOnCrimson from "@assets/Logo_Markaz_Rabithah_on_crimson_1777348637704.png";
 import logoOnIvory from "@assets/Logo_Markaz_Rabithah_on_ivory_1777348637704.png";
 import { useReveal } from "@/hooks/use-reveal";
+
+// ---- Scroll progress bar ----------------------------------------------------
+const ScrollProgress = () => {
+  const [pct, setPct] = useState(0);
+  useEffect(() => {
+    const onScroll = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      const next = max > 0 ? (h.scrollTop / max) * 100 : 0;
+      setPct(next);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return (
+    <div
+      aria-hidden
+      className="fixed top-0 left-0 right-0 z-[60] h-[2px] bg-ivory/5 pointer-events-none"
+    >
+      <div
+        className="h-full bg-gradient-to-r from-primary via-crimson-glow to-primary origin-left transition-transform duration-150 ease-out"
+        style={{ transform: `scaleX(${pct / 100})` }}
+      />
+    </div>
+  );
+};
+
+// ---- Animated count-up ------------------------------------------------------
+const CountUp = ({
+  value,
+  className = "",
+  duration = 1800,
+}: {
+  value: string;
+  className?: string;
+  duration?: number;
+}) => {
+  // Parse leading number; preserve any prefix/suffix (+, %, /, etc.)
+  const match = value.match(/^([^\d.]*)([\d.]+)(.*)$/);
+  const prefix = match?.[1] ?? "";
+  const target = match ? parseFloat(match[2]) : NaN;
+  const suffix = match?.[3] ?? "";
+  const animatable = match !== null && !Number.isNaN(target);
+
+  const [display, setDisplay] = useState(animatable ? "0" : value);
+  const ref = useRef<HTMLSpanElement | null>(null);
+  const started = useRef(false);
+
+  useEffect(() => {
+    if (!animatable || !ref.current) return;
+    const el = ref.current;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting && !started.current) {
+            started.current = true;
+            const start = performance.now();
+            const isInt = !value.includes(".");
+            const tick = (now: number) => {
+              const t = Math.min(1, (now - start) / duration);
+              const eased = 1 - Math.pow(1 - t, 3);
+              const cur = target * eased;
+              setDisplay(isInt ? String(Math.round(cur)) : cur.toFixed(1));
+              if (t < 1) requestAnimationFrame(tick);
+              else setDisplay(isInt ? String(Math.round(target)) : target.toFixed(1));
+            };
+            requestAnimationFrame(tick);
+            io.unobserve(el);
+          }
+        }
+      },
+      { threshold: 0.4 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [animatable, target, value, duration]);
+
+  return (
+    <span ref={ref} className={className}>
+      {animatable ? (
+        <>
+          {prefix}
+          {display}
+          {suffix}
+        </>
+      ) : (
+        value
+      )}
+    </span>
+  );
+};
 
 // ---- Small UI atoms ---------------------------------------------------------
 const Eyebrow = ({
@@ -253,14 +345,14 @@ const Nav = () => {
             <a
               key={l.href}
               href={l.href}
-              className="text-[0.7rem] uppercase tracking-[0.2em] text-ivory/70 hover:text-primary transition-colors"
+              className="nav-link text-[0.7rem] uppercase tracking-[0.2em] text-ivory/70 hover:text-primary transition-colors"
             >
               {l.label}
             </a>
           ))}
           <a
             href="#kontak"
-            className="text-[0.7rem] uppercase tracking-[0.2em] px-4 py-2 bg-primary text-ivory hover:bg-primary/90 rounded-full transition-colors font-semibold"
+            className="shine text-[0.7rem] uppercase tracking-[0.2em] px-4 py-2 bg-primary text-ivory hover:bg-primary/90 rounded-full transition-colors font-semibold"
           >
             Daftar
           </a>
@@ -377,6 +469,8 @@ const Index = () => {
 
   return (
     <main id="top" className="relative text-ivory overflow-x-hidden" style={{ backgroundColor: "hsl(var(--navy-deep))" }}>
+      <ScrollProgress />
+
       {/* GLOBAL ELEGANT AMBIENT BACKGROUND ================================== */}
       <div
         aria-hidden
@@ -390,6 +484,17 @@ const Index = () => {
             "linear-gradient(180deg, hsl(215 70% 11%) 0%, hsl(var(--navy-deep)) 50%, hsl(215 75% 9%) 100%)",
         }}
       />
+      {/* slow drifting aurora blobs for depth */}
+      <div aria-hidden className="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
+        <div
+          className="absolute -top-1/4 -left-1/4 w-[60vw] h-[60vw] rounded-full blur-3xl animate-aurora"
+          style={{ background: "radial-gradient(circle, hsl(0 70% 32% / 0.18), transparent 60%)" }}
+        />
+        <div
+          className="absolute -bottom-1/4 -right-1/4 w-[55vw] h-[55vw] rounded-full blur-3xl animate-aurora"
+          style={{ background: "radial-gradient(circle, hsl(215 60% 30% / 0.22), transparent 60%)", animationDelay: "-7s" }}
+        />
+      </div>
       {/* edge vignette */}
       <div
         aria-hidden
@@ -414,6 +519,33 @@ const Index = () => {
       {/* LOGO HERO (splash) ================================================ */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-4 md:px-6 overflow-hidden">
         <div className="reveal relative w-[260px] md:w-full md:max-w-md mx-auto aspect-square flex items-center justify-center animate-float">
+          {/* Outer slow-spinning ring */}
+          <div
+            aria-hidden
+            className="absolute inset-[8%] rounded-full border border-ivory/10 animate-spin-slow"
+            style={{ borderTopColor: "hsl(var(--crimson) / 0.5)" }}
+          />
+          <div
+            aria-hidden
+            className="absolute inset-[18%] rounded-full border border-ivory/5 animate-spin-slow"
+            style={{ animationDirection: "reverse", animationDuration: "60s" }}
+          />
+          {/* Pulsing crimson ring */}
+          <div
+            aria-hidden
+            className="absolute inset-[24%] rounded-full border border-primary/40 animate-ping-ring"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-[24%] rounded-full border border-primary/30 animate-ping-ring"
+            style={{ animationDelay: "-1.3s" }}
+          />
+          {/* Aurora glow behind logo */}
+          <div
+            aria-hidden
+            className="absolute inset-[20%] rounded-full blur-3xl animate-slow-pulse"
+            style={{ background: "radial-gradient(circle, hsl(var(--crimson) / 0.45), transparent 65%)" }}
+          />
           <img
             src={logoMark}
             alt="Markaz Rabithah"
@@ -422,14 +554,15 @@ const Index = () => {
         </div>
 
         {/* arabic name beneath */}
-        <div className="mt-6 md:mt-8 text-center">
-          <div className="font-arabic text-2xl md:text-4xl text-ivory/70 leading-none" dir="rtl">
-            مركز الرابطة
+        <div className="mt-6 md:mt-8 text-center reveal" style={{ transitionDelay: "300ms" }}>
+          <div className="font-arabic text-2xl md:text-4xl text-ivory/70 leading-none flex items-baseline justify-center gap-1" dir="rtl">
+            <span>مركز الرابطة</span>
+            <span aria-hidden className="inline-block w-[2px] h-6 md:h-8 bg-primary animate-caret-blink translate-y-1" />
           </div>
         </div>
 
         <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 text-primary animate-slow-pulse">
-          <svg viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
+          <svg viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6 animate-float" fill="none" stroke="currentColor" strokeWidth="1.5">
             <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
@@ -441,7 +574,7 @@ const Index = () => {
           <Eyebrow num="00">Logo Grid System</Eyebrow>
           <h2 className="reveal font-display font-extrabold text-2xl md:text-6xl leading-[1.05] text-ivory max-w-3xl mb-6 md:mb-12">
             Konstruksi logo,{" "}
-            <span className="text-primary">terukur presisi.</span>
+            <span className="text-primary text-shimmer">terukur presisi.</span>
           </h2>
 
           {/* Construction canvas */}
@@ -506,11 +639,27 @@ const Index = () => {
               ].map((p, i) => (
                 <div
                   key={i}
-                  className="absolute w-1.5 h-1.5 md:w-2 md:h-2 bg-primary border border-ivory"
-                  style={{ top: p.top, left: p.left, transform: "translate(-50%,-50%)" }}
+                  className="absolute w-1.5 h-1.5 md:w-2 md:h-2 bg-primary border border-ivory animate-anchor-pulse"
+                  style={{
+                    top: p.top,
+                    left: p.left,
+                    transform: "translate(-50%,-50%)",
+                    animationDelay: `${i * 180}ms`,
+                  }}
                 />
               ))}
             </div>
+
+            {/* Horizontal scan line drifting through the canvas */}
+            <div
+              aria-hidden
+              className="absolute left-0 right-0 h-px pointer-events-none animate-scan-line"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, hsl(var(--crimson) / 0.85) 50%, transparent)",
+                boxShadow: "0 0 12px hsl(var(--crimson) / 0.4)",
+              }}
+            />
 
             {/* Corner markers */}
             <div aria-hidden className="absolute top-2 left-2 md:top-3 md:left-3 text-primary">
@@ -544,11 +693,11 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="reveal mt-6 md:mt-10 grid grid-cols-3 gap-2 md:gap-5 max-w-md md:max-w-lg mx-auto">
+          <div className="reveal stagger mt-6 md:mt-10 grid grid-cols-3 gap-2 md:gap-5 max-w-md md:max-w-lg mx-auto">
             {stats.map((s) => (
-              <div key={s.l} className="text-center">
+              <div key={s.l} className="reveal text-center">
                 <div className="font-display font-bold text-base md:text-2xl text-primary">
-                  {s.v}
+                  <CountUp value={s.v} />
                 </div>
                 <div className="text-[0.55rem] md:text-[0.65rem] uppercase tracking-wider text-ivory/55 mt-1 leading-snug">
                   {s.l}
@@ -596,7 +745,7 @@ const Index = () => {
             ].map((c, i) => (
               <div
                 key={c.t}
-                className="reveal border border-ivory/10 p-3 md:p-5 hover:border-primary/40 transition-colors group"
+                className="reveal lift shine border border-ivory/10 p-3 md:p-5 hover:border-primary/40 group"
                 style={{ transitionDelay: `${i * 60}ms` }}
               >
                 <div className="flex items-start justify-between mb-2 md:mb-3">
@@ -632,7 +781,7 @@ const Index = () => {
           <Eyebrow num="02">Filosofi Nama</Eyebrow>
           <h2 className="reveal font-display font-extrabold text-2xl md:text-6xl leading-[1.05] text-ivory max-w-3xl mb-8 md:mb-20">
             Dua kata,{" "}
-            <span className="text-primary">satu arah gerak.</span>
+            <span className="text-primary text-shimmer">satu arah gerak.</span>
           </h2>
 
           <div className="grid md:grid-cols-2 gap-8 md:gap-20">
@@ -706,14 +855,14 @@ const Index = () => {
           <Eyebrow num="03">Pilar Misi</Eyebrow>
           <h2 className="reveal font-display font-extrabold text-2xl md:text-6xl leading-[1.05] text-ivory max-w-3xl mb-8 md:mb-16">
             Empat pondasi,{" "}
-            <span className="text-primary">satu santri utuh.</span>
+            <span className="text-primary text-shimmer">satu santri utuh.</span>
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-ivory/10">
             {missions.map((m, i) => (
               <div
                 key={m.t}
-                className="reveal group relative bg-background p-4 md:p-7 transition-colors duration-500 hover:bg-navy-light/40"
+                className="reveal shine group relative bg-background p-4 md:p-7 transition-all duration-500 hover:bg-navy-light/40 hover:-translate-y-1"
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
                 <div className="flex items-start justify-between mb-3 md:mb-6">
@@ -741,14 +890,14 @@ const Index = () => {
         <div className="container-brand max-w-6xl mx-auto">
           <Eyebrow num="04">Program Pembelajaran</Eyebrow>
           <h2 className="reveal font-display font-extrabold text-2xl md:text-6xl leading-[1.05] text-ivory max-w-3xl mb-8 md:mb-16">
-            Persiapan menyeluruh, <span className="text-primary">terstruktur.</span>
+            Persiapan menyeluruh, <span className="text-primary text-shimmer">terstruktur.</span>
           </h2>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
             {program.map((p, i) => (
               <div
                 key={p.t}
-                className="reveal border border-ivory/10 p-3 md:p-5 hover:border-primary/40 hover:bg-navy-light/30 transition-all"
+                className="reveal lift shine border border-ivory/10 p-3 md:p-5 hover:border-primary/40 hover:bg-navy-light/30"
                 style={{ transitionDelay: `${i * 50}ms` }}
               >
                 <div className="text-primary text-[0.65rem] md:text-xs font-bold mb-1.5 md:mb-2">
@@ -771,7 +920,7 @@ const Index = () => {
         <div className="container-brand max-w-6xl mx-auto">
           <Eyebrow num="05">Identitas Visual</Eyebrow>
           <h2 className="reveal font-display font-extrabold text-2xl md:text-6xl leading-[1.05] text-ivory max-w-3xl mb-6 md:mb-10">
-            Bahasa visual <span className="text-primary">yang jujur.</span>
+            Bahasa visual <span className="text-primary text-shimmer">yang jujur.</span>
           </h2>
 
           {/* Download Assets CTA */}
@@ -780,10 +929,13 @@ const Index = () => {
               href="https://drive.google.com/drive/folders/1V5eahQZpSaXwpekZ7RcK6ZRRNwHjVw1V?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 p-4 md:p-6 bg-primary hover:bg-primary/90 border border-primary text-ivory transition-all hover:shadow-[0_10px_40px_-10px_rgba(178,34,34,0.6)]"
+              className="shine group relative flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 p-4 md:p-6 bg-primary hover:bg-primary/90 border border-primary text-ivory transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_60px_-15px_rgba(178,34,34,0.7)]"
             >
-              <div className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-ivory/15 group-hover:bg-ivory/25 transition-colors shrink-0">
-                <svg viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <div className="relative flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-ivory/15 group-hover:bg-ivory/25 transition-colors shrink-0">
+                {/* pulsing ring around the icon */}
+                <span aria-hidden className="absolute inset-0 rounded-full border border-ivory/40 animate-ping-ring" />
+                <span aria-hidden className="absolute inset-0 rounded-full border border-ivory/30 animate-ping-ring" style={{ animationDelay: "-1.3s" }} />
+                <svg viewBox="0 0 24 24" className="relative w-5 h-5 md:w-6 md:h-6 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" strokeLinecap="round" strokeLinejoin="round" />
                   <path d="M7 10l5 5 5-5" strokeLinecap="round" strokeLinejoin="round" />
                   <path d="M12 15V3" strokeLinecap="round" strokeLinejoin="round" />
@@ -814,7 +966,7 @@ const Index = () => {
               type="button"
               onClick={() => setLightbox("logo")}
               aria-label="Lihat logo dari dekat"
-              className="reveal group relative w-full aspect-[16/9] bg-navy-light/40 border border-ivory/10 flex items-center justify-center p-8 md:p-16 cursor-zoom-in hover:border-primary/40 hover:bg-navy-light/55 transition-all overflow-hidden"
+              className="reveal shine group relative w-full aspect-[16/9] bg-navy-light/40 border border-ivory/10 flex items-center justify-center p-8 md:p-16 cursor-zoom-in hover:border-primary/40 hover:bg-navy-light/55 transition-all overflow-hidden"
             >
               <img
                 src={logo}
@@ -864,7 +1016,7 @@ const Index = () => {
             type="button"
             onClick={() => setLightbox("typography")}
             aria-label="Lihat tipografi dari dekat"
-            className="reveal group block w-full text-left border border-ivory/10 p-3 md:p-6 cursor-zoom-in hover:border-primary/40 hover:bg-navy-light/30 transition-all"
+            className="reveal shine group block w-full text-left border border-ivory/10 p-3 md:p-6 cursor-zoom-in hover:border-primary/40 hover:bg-navy-light/30 transition-all"
           >
             <div className="flex items-center justify-between mb-2 md:mb-4">
               <div className="text-[0.6rem] md:text-xs uppercase tracking-[0.3em] text-ivory/60">
@@ -1008,7 +1160,7 @@ const Index = () => {
           </div>
           <h2 className="reveal font-display font-extrabold text-2xl md:text-6xl leading-[1.05] text-ivory mb-4 md:mb-6">
             Butuh identitas visual <br />
-            <span className="text-primary">untuk brand-mu?</span>
+            <span className="text-primary text-shimmer">untuk brand-mu?</span>
           </h2>
           <p className="reveal text-xs md:text-base text-ivory/65 max-w-xl mx-auto mb-6 md:mb-10 leading-relaxed">
             Brand guideline ini dirancang oleh <span className="text-ivory font-semibold">SYMP Studio</span> —

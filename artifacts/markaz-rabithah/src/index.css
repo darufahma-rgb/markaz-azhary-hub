@@ -157,11 +157,124 @@
     opacity: 0;
     transform: translateY(40px);
     transition: opacity 1.1s var(--ease-smooth), transform 1.1s var(--ease-smooth);
+    will-change: transform, opacity;
   }
   .reveal.is-visible {
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* Stagger children inside a parent with .stagger */
+  .stagger > * { transition-delay: 0ms; }
+  .stagger > *:nth-child(2) { transition-delay: 80ms; }
+  .stagger > *:nth-child(3) { transition-delay: 160ms; }
+  .stagger > *:nth-child(4) { transition-delay: 240ms; }
+  .stagger > *:nth-child(5) { transition-delay: 320ms; }
+  .stagger > *:nth-child(6) { transition-delay: 400ms; }
+
+  /* Shine sweep on hover — works on any relative element with overflow-hidden */
+  .shine {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .shine::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      transparent 30%,
+      hsl(var(--ivory) / 0.18) 50%,
+      transparent 70%
+    );
+    transform: translateX(-120%) skewX(-20deg);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .shine:hover::after {
+    animation: shine-sweep 1.1s ease-out;
+  }
+
+  /* Hover lift used on cards */
+  .lift {
+    transition: transform 0.6s var(--ease-smooth), border-color 0.4s var(--ease-smooth),
+      background-color 0.4s var(--ease-smooth), box-shadow 0.6s var(--ease-smooth);
+  }
+  .lift:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 22px 50px -28px hsl(var(--crimson) / 0.55);
+  }
+
+  /* Animated text gradient — apply on a span/highlight */
+  .text-shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--crimson)) 0%,
+      hsl(var(--crimson-glow)) 30%,
+      hsl(40 80% 80%) 50%,
+      hsl(var(--crimson-glow)) 70%,
+      hsl(var(--crimson)) 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 7s linear infinite;
+  }
+
+  /* Underline grow for nav links */
+  .nav-link {
+    position: relative;
+  }
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 1px;
+    background: hsl(var(--crimson));
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.45s var(--ease-smooth);
+  }
+  .nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+
+  /* Animated horizontal divider */
+  .divider-anim {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--crimson) / 0.6) 50%,
+      transparent
+    );
+    background-size: 200% 100%;
+    animation: shimmer 8s linear infinite;
+  }
+}
+
+/* Honor user reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@layer components {
 
   .grid-lines {
     background-image:
