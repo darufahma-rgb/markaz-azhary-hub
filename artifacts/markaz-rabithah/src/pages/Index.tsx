@@ -204,15 +204,72 @@ const Index = () => {
       <Nav />
 
       {/* LOGO HERO (splash) ================================================ */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 md:px-6 overflow-hidden pt-20 md:pt-0">
-        {/* decorative grid */}
+      <section
+        className="relative min-h-screen flex items-center justify-center px-4 md:px-6 overflow-hidden pt-20 md:pt-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 35%, hsl(215 55% 18%) 0%, hsl(var(--navy)) 45%, hsl(var(--navy-deep)) 100%)",
+        }}
+      >
+        {/* faint warm ivory wash */}
         <div
           aria-hidden
-          className="absolute inset-0 opacity-[0.05] pointer-events-none"
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(circle at 50% 50%, rgba(212,184,122,0.05) 0%, transparent 60%)",
+          }}
+        />
+
+        {/* ornamental mandala — subtle SVG */}
+        <svg
+          aria-hidden
+          viewBox="0 0 600 600"
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] md:w-[700px] h-auto opacity-[0.07] pointer-events-none"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="0.8"
+        >
+          <g className="text-ivory">
+            <circle cx="300" cy="300" r="120" />
+            <circle cx="300" cy="300" r="180" />
+            <circle cx="300" cy="300" r="240" />
+            <circle cx="300" cy="300" r="290" />
+            {Array.from({ length: 16 }).map((_, i) => {
+              const a = (i * Math.PI * 2) / 16;
+              const x1 = 300 + Math.cos(a) * 120;
+              const y1 = 300 + Math.sin(a) * 120;
+              const x2 = 300 + Math.cos(a) * 290;
+              const y2 = 300 + Math.sin(a) * 290;
+              return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} />;
+            })}
+            {Array.from({ length: 8 }).map((_, i) => {
+              const a = (i * Math.PI * 2) / 8 + Math.PI / 8;
+              const cx = 300 + Math.cos(a) * 210;
+              const cy = 300 + Math.sin(a) * 210;
+              return <circle key={`d${i}`} cx={cx} cy={cy} r="14" />;
+            })}
+          </g>
+        </svg>
+
+        {/* fine grid */}
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.035] pointer-events-none"
           style={{
             backgroundImage:
-              "linear-gradient(to right, rgba(244,238,228,0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(244,238,228,0.4) 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
+              "linear-gradient(to right, rgba(244,238,228,0.5) 1px, transparent 1px), linear-gradient(to bottom, rgba(244,238,228,0.5) 1px, transparent 1px)",
+            backgroundSize: "100px 100px",
+          }}
+        />
+
+        {/* vignette */}
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, transparent 50%, hsl(var(--navy-deep) / 0.85) 100%)",
           }}
         />
 
@@ -222,7 +279,7 @@ const Index = () => {
           <img
             src={logoMark}
             alt="Markaz Rabithah"
-            className="relative w-3/5 h-auto object-contain drop-shadow-[0_0_40px_rgba(178,34,34,0.25)]"
+            className="relative w-3/5 h-auto object-contain drop-shadow-[0_0_50px_rgba(178,34,34,0.35)]"
           />
           <div className="absolute -top-2 -left-2 text-primary">
             <PlusMark className="w-3.5 h-3.5 md:w-5 md:h-5" />
@@ -235,6 +292,16 @@ const Index = () => {
           </div>
           <div className="absolute -bottom-2 -right-2 text-primary">
             <PlusMark className="w-3.5 h-3.5 md:w-5 md:h-5" />
+          </div>
+        </div>
+
+        {/* arabic name beneath */}
+        <div className="absolute bottom-16 md:bottom-24 left-1/2 -translate-x-1/2 text-center">
+          <div className="font-arabic text-2xl md:text-4xl text-ivory/70 leading-none mb-2" dir="rtl">
+            مركز الرابطة
+          </div>
+          <div className="text-[0.55rem] md:text-[0.65rem] uppercase tracking-[0.4em] text-ivory/40">
+            Mahad Persiapan Al-Azhar
           </div>
         </div>
 
@@ -466,7 +533,7 @@ const Index = () => {
 
           {/* arabic kaligrafi quote */}
           <div className="reveal mt-10 md:mt-24 border-y border-ivory/10 py-7 md:py-14 text-center">
-            <p className="font-serif text-xl md:text-4xl text-ivory mb-3 md:mb-4 leading-relaxed" dir="rtl">
+            <p className="font-arabic text-3xl md:text-6xl text-ivory mb-3 md:mb-5 leading-[1.4]" dir="rtl">
               العِلْمُ نُورٌ، وَالسَّنَدُ حَبْلٌ لَا يَنْقَطِعُ
             </p>
             <p className="text-[0.7rem] md:text-sm text-ivory/55 italic">
@@ -496,7 +563,7 @@ const Index = () => {
                   <span className="font-display font-extrabold text-primary text-2xl md:text-5xl">
                     {m.n}
                   </span>
-                  <span className="font-serif text-lg md:text-2xl text-ivory/50 group-hover:text-primary transition-colors" dir="rtl">
+                  <span className="font-arabic text-2xl md:text-4xl text-ivory/55 group-hover:text-primary transition-colors leading-none" dir="rtl">
                     {m.ar}
                   </span>
                 </div>

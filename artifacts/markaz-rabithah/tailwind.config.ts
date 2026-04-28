@@ -15,6 +15,7 @@ export default {
         display: ["'Sk Modernist'", "Inter", "system-ui", "sans-serif"],
         sans: ["'Sk Modernist'", "Inter", "system-ui", "sans-serif"],
         serif: ["'Sk Modernist'", "Inter", "system-ui", "sans-serif"],
+        arabic: ["'Qahwa Arabic'", "'Amiri'", "'Scheherazade New'", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",

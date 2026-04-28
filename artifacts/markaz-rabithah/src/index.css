@@ -10,6 +10,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Qahwa Arabic";
+  src: url("/fonts/Qahwa-Arabic-Black.otf") format("opentype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Markaz Rabithah — Azhary Modern Design System
    All colors MUST be HSL.
 */
