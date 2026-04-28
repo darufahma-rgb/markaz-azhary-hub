@@ -71,7 +71,7 @@ const Nav = () => {
             className="w-7 h-7 md:w-8 md:h-8 object-contain"
           />
           <span className="font-display font-extrabold text-[0.8rem] md:text-sm tracking-tight text-ivory">
-            Markaz <span className="text-primary">Rabithah</span>
+            Logo <span className="text-primary">Guideline</span>
           </span>
         </a>
 
@@ -236,31 +236,17 @@ const Index = () => {
       <Nav />
 
       {/* LOGO HERO (splash) ================================================ */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 md:px-6 overflow-hidden pt-20 md:pt-0">
-        <div className="reveal relative w-[260px] md:w-full md:max-w-md mx-auto aspect-square flex items-center justify-center">
-          <div className="absolute inset-4 md:inset-10 rounded-full border border-ivory/10" />
-          <div className="absolute inset-10 md:inset-24 rounded-full border border-ivory/10" />
+      <section className="relative min-h-screen flex flex-col items-center justify-center px-4 md:px-6 overflow-hidden">
+        <div className="reveal relative w-[260px] md:w-full md:max-w-md mx-auto aspect-square flex items-center justify-center animate-float">
           <img
             src={logoMark}
             alt="Markaz Rabithah"
-            className="relative w-3/5 h-auto object-contain drop-shadow-[0_0_50px_rgba(178,34,34,0.35)]"
+            className="relative w-3/5 h-auto object-contain drop-shadow-[0_0_60px_rgba(178,34,34,0.4)]"
           />
-          <div className="absolute -top-2 -left-2 text-primary">
-            <PlusMark className="w-3.5 h-3.5 md:w-5 md:h-5" />
-          </div>
-          <div className="absolute -top-2 -right-2 text-primary">
-            <PlusMark className="w-3.5 h-3.5 md:w-5 md:h-5" />
-          </div>
-          <div className="absolute -bottom-2 -left-2 text-primary">
-            <PlusMark className="w-3.5 h-3.5 md:w-5 md:h-5" />
-          </div>
-          <div className="absolute -bottom-2 -right-2 text-primary">
-            <PlusMark className="w-3.5 h-3.5 md:w-5 md:h-5" />
-          </div>
         </div>
 
         {/* arabic name beneath */}
-        <div className="absolute bottom-16 md:bottom-24 left-1/2 -translate-x-1/2 text-center">
+        <div className="mt-6 md:mt-8 text-center">
           <div className="font-arabic text-2xl md:text-4xl text-ivory/70 leading-none" dir="rtl">
             مركز الرابطة
           </div>
