@@ -28,4 +28,4 @@ See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and pa
 
 ## Artifacts
 
-- `artifacts/markaz-rabithah` — Markaz Rabithah brand guideline microsite (React + Vite, Tailwind v3, react-router-dom). Ported from a Lovable.dev project. Frontend-only, no backend or database needed.
+- `artifacts/markaz-rabithah` — Markaz Rabithah Logo Guide microsite by SYMP Studio (React + Vite, Tailwind v3, react-router-dom). Frontend-only, no backend or database needed.
