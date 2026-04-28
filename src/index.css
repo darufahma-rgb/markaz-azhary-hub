@@ -153,6 +153,24 @@
       linear-gradient(to bottom, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
     background-size: 80px 80px;
   }
+
+  /* Section background variants */
+  .section-light {
+    background-color: hsl(var(--ivory));
+    color: hsl(var(--navy-deep));
+  }
+  .section-light .text-ivory { color: hsl(var(--navy-deep)) !important; }
+  .section-light .text-muted-foreground { color: hsl(215 40% 30%) !important; }
+  .section-light .bg-background { background-color: hsl(var(--ivory)) !important; }
+  .section-light .border-border\/30 { border-color: hsl(215 40% 80%) !important; }
+  .section-light .border-border\/20 { border-color: hsl(215 40% 85%) !important; }
+  .section-light .bg-border\/40 { background-color: hsl(215 40% 80%) !important; }
+  .section-light .hover\:bg-navy-light\/30:hover { background-color: hsl(215 30% 90%) !important; }
+
+  .section-navy-light {
+    background-color: hsl(var(--navy-light));
+  }
+  .section-navy-light .bg-background { background-color: hsl(var(--navy-light)) !important; }
 }
 
 /* Geometos-like fallback using a strong geometric stack. We label the display font
