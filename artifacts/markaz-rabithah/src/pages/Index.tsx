@@ -108,6 +108,87 @@ const ColorSwatch = ({
   );
 };
 
+const CloseIcon = ({ className = "" }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    aria-hidden="true"
+  >
+    <path d="M6 6l12 12M6 18L18 6" strokeLinecap="round" />
+  </svg>
+);
+
+const Lightbox = ({
+  open,
+  onClose,
+  title,
+  caption,
+  children,
+}: {
+  open: boolean;
+  onClose: () => void;
+  title?: string;
+  caption?: string;
+  children: React.ReactNode;
+}) => {
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={title}
+      className="fixed inset-0 z-[100] flex items-center justify-center p-3 md:p-8 animate-in fade-in duration-200"
+      style={{ background: "rgba(5, 12, 24, 0.92)", backdropFilter: "blur(16px)" }}
+      onClick={onClose}
+    >
+      <button
+        type="button"
+        onClick={onClose}
+        aria-label="Close"
+        className="absolute top-3 right-3 md:top-5 md:right-5 z-10 w-9 h-9 md:w-11 md:h-11 flex items-center justify-center rounded-full border border-ivory/15 bg-background/60 text-ivory hover:bg-primary hover:border-primary transition-colors"
+      >
+        <CloseIcon className="w-4 h-4 md:w-5 md:h-5" />
+      </button>
+
+      {title && (
+        <div className="absolute top-4 md:top-6 left-4 md:left-6 z-10 text-[0.55rem] md:text-[0.65rem] uppercase tracking-[0.3em] text-ivory/60">
+          {title}
+        </div>
+      )}
+
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative w-full max-w-5xl max-h-[90vh] overflow-auto"
+      >
+        {children}
+      </div>
+
+      {caption && (
+        <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 text-[0.6rem] md:text-xs text-ivory/50 text-center px-4">
+          {caption}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const PlusMark = ({ className = "" }: { className?: string }) => (
   <svg
     viewBox="0 0 24 24"
@@ -226,8 +307,11 @@ const Nav = () => {
 };
 
 // ---- Main page --------------------------------------------------------------
+type LightboxKey = null | "logo" | "typography";
+
 const Index = () => {
   useReveal();
+  const [lightbox, setLightbox] = useState<LightboxKey>(null);
 
   const missions = [
     {
@@ -689,9 +773,26 @@ const Index = () => {
           </h2>
 
           <div className="mb-8 md:mb-12">
-            <div className="reveal aspect-[16/9] bg-navy-light/40 border border-ivory/10 flex items-center justify-center p-8 md:p-16">
-              <img src={logo} alt="Logo on dark" className="max-w-[60%] md:max-w-[40%] h-auto" />
-            </div>
+            <button
+              type="button"
+              onClick={() => setLightbox("logo")}
+              aria-label="Lihat logo dari dekat"
+              className="reveal group relative w-full aspect-[16/9] bg-navy-light/40 border border-ivory/10 flex items-center justify-center p-8 md:p-16 cursor-zoom-in hover:border-primary/40 hover:bg-navy-light/55 transition-all overflow-hidden"
+            >
+              <img
+                src={logo}
+                alt="Logo on dark"
+                className="max-w-[60%] md:max-w-[40%] h-auto transition-transform duration-500 group-hover:scale-[1.04]"
+              />
+              <div className="absolute top-3 right-3 md:top-4 md:right-4 flex items-center gap-1.5 text-[0.55rem] md:text-[0.65rem] uppercase tracking-[0.25em] text-ivory/45 group-hover:text-primary transition-colors">
+                <svg viewBox="0 0 24 24" className="w-3 h-3 md:w-3.5 md:h-3.5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="M21 21l-4.3-4.3M11 8v6M8 11h6" strokeLinecap="round" />
+                </svg>
+                <span className="hidden md:inline">Klik untuk perbesar</span>
+                <span className="md:hidden">Perbesar</span>
+              </div>
+            </button>
           </div>
 
           {/* color palette */}
@@ -722,9 +823,23 @@ const Index = () => {
           </div>
 
           {/* typography */}
-          <div className="reveal border border-ivory/10 p-3 md:p-6">
-            <div className="text-[0.6rem] md:text-xs uppercase tracking-[0.3em] text-ivory/60 mb-2 md:mb-4">
-              Tipografi
+          <button
+            type="button"
+            onClick={() => setLightbox("typography")}
+            aria-label="Lihat tipografi dari dekat"
+            className="reveal group block w-full text-left border border-ivory/10 p-3 md:p-6 cursor-zoom-in hover:border-primary/40 hover:bg-navy-light/30 transition-all"
+          >
+            <div className="flex items-center justify-between mb-2 md:mb-4">
+              <div className="text-[0.6rem] md:text-xs uppercase tracking-[0.3em] text-ivory/60">
+                Tipografi
+              </div>
+              <div className="flex items-center gap-1.5 text-[0.55rem] md:text-[0.65rem] uppercase tracking-[0.25em] text-ivory/45 group-hover:text-primary transition-colors">
+                <svg viewBox="0 0 24 24" className="w-3 h-3 md:w-3.5 md:h-3.5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="M21 21l-4.3-4.3M11 8v6M8 11h6" strokeLinecap="round" />
+                </svg>
+                <span>Perbesar</span>
+              </div>
             </div>
             <div className="grid md:grid-cols-2 gap-4 md:gap-8 items-start">
               <div>
@@ -741,9 +856,106 @@ const Index = () => {
                 <div>Xx Yy Zz · 1234567890</div>
               </div>
             </div>
-          </div>
+          </button>
         </div>
       </section>
+
+      {/* LIGHTBOX MODALS =================================================== */}
+      <Lightbox
+        open={lightbox === "logo"}
+        onClose={() => setLightbox(null)}
+        title="Logo · Tampilan Detail"
+        caption="Tekan ESC atau klik area gelap untuk menutup"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-ivory/10 border border-ivory/10">
+          {[
+            { bg: "hsl(var(--navy-deep))", label: "On Navy", textOnLight: false },
+            { bg: "#B22222", label: "On Crimson", textOnLight: false },
+            { bg: "#F4EEE4", label: "On Ivory", textOnLight: true },
+          ].map((v) => (
+            <div
+              key={v.label}
+              className="relative aspect-[4/3] md:aspect-square flex items-center justify-center p-6 md:p-10"
+              style={{ backgroundColor: v.bg }}
+            >
+              <img src={logo} alt={`Logo ${v.label}`} className="w-3/4 h-auto object-contain" />
+              <div
+                className="absolute bottom-3 left-3 md:bottom-4 md:left-4 text-[0.55rem] md:text-[0.65rem] uppercase tracking-[0.3em] font-medium opacity-70"
+                style={{ color: v.textOnLight ? "hsl(var(--navy-deep))" : "rgb(244 238 228)" }}
+              >
+                {v.label}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-ivory/10 border-x border-b border-ivory/10">
+          <div className="relative bg-background flex items-center justify-center p-8 md:p-12 aspect-[4/3] md:aspect-[2/1]">
+            <img src={logoMark} alt="Logo Mark" className="w-1/2 h-auto object-contain" />
+            <div className="absolute bottom-3 left-3 md:bottom-4 md:left-4 text-[0.55rem] md:text-[0.65rem] uppercase tracking-[0.3em] text-ivory/60 font-medium">
+              Mark Only
+            </div>
+          </div>
+          <div className="relative flex items-center justify-center p-8 md:p-12 aspect-[4/3] md:aspect-[2/1]" style={{ backgroundColor: "#F4EEE4" }}>
+            <img src={logoMark} alt="Logo Mark on Ivory" className="w-1/2 h-auto object-contain" />
+            <div className="absolute bottom-3 left-3 md:bottom-4 md:left-4 text-[0.55rem] md:text-[0.65rem] uppercase tracking-[0.3em] font-medium opacity-70" style={{ color: "hsl(var(--navy-deep))" }}>
+              Mark · Ivory
+            </div>
+          </div>
+        </div>
+      </Lightbox>
+
+      <Lightbox
+        open={lightbox === "typography"}
+        onClose={() => setLightbox(null)}
+        title="Tipografi · Tampilan Detail"
+        caption="Tekan ESC atau klik area gelap untuk menutup"
+      >
+        <div className="bg-background border border-ivory/10 p-6 md:p-12">
+          <div className="text-[0.6rem] md:text-xs uppercase tracking-[0.3em] text-primary mb-2 md:mb-3">
+            Sk Modernist · Bold
+          </div>
+          <div className="font-display font-extrabold text-ivory text-5xl md:text-9xl leading-[0.95] tracking-tight mb-6 md:mb-10">
+            Aa Bb Cc
+          </div>
+          <div className="font-display font-extrabold text-ivory text-3xl md:text-6xl leading-[1] mb-2 md:mb-3">
+            ABCDEFGHIJKLMNOPQRSTUVWXYZ
+          </div>
+          <div className="font-display font-extrabold text-ivory/85 text-3xl md:text-6xl leading-[1] mb-2 md:mb-3">
+            abcdefghijklmnopqrstuvwxyz
+          </div>
+          <div className="font-display font-extrabold text-primary text-3xl md:text-6xl leading-[1] mb-6 md:mb-10">
+            0 1 2 3 4 5 6 7 8 9
+          </div>
+
+          <div className="border-t border-ivory/10 pt-5 md:pt-8 grid md:grid-cols-3 gap-5 md:gap-8">
+            <div>
+              <div className="text-[0.55rem] md:text-[0.65rem] uppercase tracking-[0.3em] text-ivory/50 mb-1.5 md:mb-2">
+                Display
+              </div>
+              <div className="font-display font-extrabold text-ivory text-3xl md:text-5xl leading-tight">
+                Bismillah
+              </div>
+            </div>
+            <div>
+              <div className="text-[0.55rem] md:text-[0.65rem] uppercase tracking-[0.3em] text-ivory/50 mb-1.5 md:mb-2">
+                Subheading
+              </div>
+              <div className="font-display font-bold text-ivory text-xl md:text-2xl leading-snug">
+                Markaz Rabithah
+              </div>
+            </div>
+            <div>
+              <div className="text-[0.55rem] md:text-[0.65rem] uppercase tracking-[0.3em] text-ivory/50 mb-1.5 md:mb-2">
+                Body
+              </div>
+              <div className="text-ivory/80 text-sm md:text-base leading-relaxed">
+                Kokoh ilmunya, terjaga hafalannya, luhur akhlaknya.
+              </div>
+            </div>
+          </div>
+        </div>
+      </Lightbox>
 
       {/* CTA / KONTAK ====================================================== */}
       <section
