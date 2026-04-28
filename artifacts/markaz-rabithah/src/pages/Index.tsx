@@ -221,48 +221,6 @@ const Index = () => {
           }}
         />
 
-        {/* ornamental mandala — subtle SVG */}
-        <svg
-          aria-hidden
-          viewBox="0 0 600 600"
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] md:w-[700px] h-auto opacity-[0.07] pointer-events-none"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="0.8"
-        >
-          <g className="text-ivory">
-            <circle cx="300" cy="300" r="120" />
-            <circle cx="300" cy="300" r="180" />
-            <circle cx="300" cy="300" r="240" />
-            <circle cx="300" cy="300" r="290" />
-            {Array.from({ length: 16 }).map((_, i) => {
-              const a = (i * Math.PI * 2) / 16;
-              const x1 = 300 + Math.cos(a) * 120;
-              const y1 = 300 + Math.sin(a) * 120;
-              const x2 = 300 + Math.cos(a) * 290;
-              const y2 = 300 + Math.sin(a) * 290;
-              return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} />;
-            })}
-            {Array.from({ length: 8 }).map((_, i) => {
-              const a = (i * Math.PI * 2) / 8 + Math.PI / 8;
-              const cx = 300 + Math.cos(a) * 210;
-              const cy = 300 + Math.sin(a) * 210;
-              return <circle key={`d${i}`} cx={cx} cy={cy} r="14" />;
-            })}
-          </g>
-        </svg>
-
-        {/* fine grid */}
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-[0.035] pointer-events-none"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, rgba(244,238,228,0.5) 1px, transparent 1px), linear-gradient(to bottom, rgba(244,238,228,0.5) 1px, transparent 1px)",
-            backgroundSize: "100px 100px",
-          }}
-        />
-
         {/* vignette */}
         <div
           aria-hidden
