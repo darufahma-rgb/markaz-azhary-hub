@@ -259,53 +259,59 @@ const Index = () => {
         </div>
       </section>
 
-      {/* HERO ============================================================== */}
+      {/* LOGO GRID ========================================================= */}
       <section className="relative md:min-h-screen flex items-center pt-12 pb-14 md:pt-32 md:pb-28 px-4 md:px-6">
-        <div className="container-brand max-w-6xl mx-auto relative grid md:grid-cols-12 gap-8 md:gap-16 items-center">
-          <div className="md:col-span-7">
-            <h1 className="reveal font-display font-extrabold text-3xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight mb-4 md:mb-6">
-              <span className="block text-ivory">Kokoh ilmunya,</span>
-              <span className="block text-ivory">terjaga hafalannya,</span>
-              <span className="block text-primary">luhur akhlaknya.</span>
-            </h1>
+        <div className="container-brand max-w-6xl mx-auto relative w-full">
+          <Eyebrow num="00">Logo Showcase</Eyebrow>
+          <h2 className="reveal font-display font-extrabold text-2xl md:text-6xl leading-[1.05] text-ivory max-w-3xl mb-6 md:mb-12">
+            Satu logo,{" "}
+            <span className="text-primary">enam ekspresi.</span>
+          </h2>
 
-            <p className="reveal text-sm md:text-lg text-ivory/70 max-w-xl leading-relaxed mb-6 md:mb-10">
-              Markaz Rabithah adalah jembatan santri menuju Al-Azhar
-              asy-Syarif — memadukan tradisi keilmuan klasik bersanad dengan
-              pendampingan modern yang adaptif untuk santri Indonesia.
-            </p>
+          <div className="reveal grid grid-cols-2 md:grid-cols-3 gap-px bg-ivory/10 border border-ivory/10">
+            {[
+              { src: logoMark, bg: "hsl(var(--navy-deep))", label: "Mark · Navy", sub: "Primary", textOnLight: false, w: "w-1/2" },
+              { src: logoMark, bg: "#B22222", label: "Mark · Crimson", sub: "Accent", textOnLight: false, w: "w-1/2" },
+              { src: logoMark, bg: "#F4EEE4", label: "Mark · Ivory", sub: "Light", textOnLight: true, w: "w-1/2" },
+              { src: logo, bg: "hsl(var(--navy-deep))", label: "Full · Navy", sub: "Primary", textOnLight: false, w: "w-3/4" },
+              { src: logo, bg: "#B22222", label: "Full · Crimson", sub: "Accent", textOnLight: false, w: "w-3/4" },
+              { src: logo, bg: "#F4EEE4", label: "Full · Ivory", sub: "Light", textOnLight: true, w: "w-3/4" },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="reveal relative aspect-square flex items-center justify-center overflow-hidden group"
+                style={{ backgroundColor: item.bg, transitionDelay: `${i * 60}ms` }}
+              >
+                <img
+                  src={item.src}
+                  alt={item.label}
+                  className={`${item.w} h-auto object-contain transition-transform duration-500 group-hover:scale-105`}
+                />
+                <div className="absolute top-2 left-2 md:top-3 md:left-3 text-[0.55rem] md:text-[0.65rem] font-bold opacity-60" style={{ color: item.textOnLight ? "hsl(var(--navy-deep))" : "rgb(244 238 228)" }}>
+                  0{i + 1}
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-2 md:p-3 flex items-end justify-between" style={{ color: item.textOnLight ? "hsl(var(--navy-deep))" : "rgb(244 238 228)" }}>
+                  <div>
+                    <div className="font-display font-bold text-[0.65rem] md:text-xs leading-tight">{item.label}</div>
+                    <div className="text-[0.5rem] md:text-[0.6rem] uppercase tracking-[0.2em] opacity-60 mt-0.5">{item.sub}</div>
+                  </div>
+                  <PlusMark className="w-3 h-3 md:w-3.5 md:h-3.5 opacity-40 group-hover:opacity-100 group-hover:rotate-90 transition-all duration-500" />
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div className="md:col-span-5 relative">
-            <div className="reveal aspect-square max-w-[260px] md:max-w-md mx-auto relative">
-              <div className="absolute inset-0 rounded-full bg-primary/10 blur-2xl" />
-              <div className="absolute inset-3 md:inset-8 rounded-full border border-ivory/10" />
-              <div className="absolute inset-7 md:inset-16 rounded-full border border-ivory/10" />
-              <img
-                src={logoMark}
-                alt="Markaz Rabithah"
-                className="absolute inset-0 m-auto w-3/5 h-auto"
-              />
-              <div className="absolute -top-2 -left-2 text-primary">
-                <PlusMark className="w-3.5 h-3.5 md:w-5 md:h-5" />
-              </div>
-              <div className="absolute -bottom-2 -right-2 text-primary">
-                <PlusMark className="w-3.5 h-3.5 md:w-5 md:h-5" />
-              </div>
-            </div>
-
-            <div className="reveal mt-5 md:mt-8 grid grid-cols-3 gap-2 md:gap-5">
-              {stats.map((s) => (
-                <div key={s.l} className="text-center">
-                  <div className="font-display font-bold text-base md:text-2xl text-primary">
-                    {s.v}
-                  </div>
-                  <div className="text-[0.55rem] md:text-[0.65rem] uppercase tracking-wider text-ivory/55 mt-1 leading-snug">
-                    {s.l}
-                  </div>
+          <div className="reveal mt-5 md:mt-8 grid grid-cols-3 gap-2 md:gap-5 max-w-md md:max-w-lg">
+            {stats.map((s) => (
+              <div key={s.l}>
+                <div className="font-display font-bold text-base md:text-2xl text-primary">
+                  {s.v}
                 </div>
-              ))}
-            </div>
+                <div className="text-[0.55rem] md:text-[0.65rem] uppercase tracking-wider text-ivory/55 mt-1 leading-snug">
+                  {s.l}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
