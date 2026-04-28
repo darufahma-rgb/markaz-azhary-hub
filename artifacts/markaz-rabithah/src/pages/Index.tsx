@@ -11,7 +11,7 @@ const Eyebrow = ({
   num: string;
   children: React.ReactNode;
 }) => (
-  <div className="reveal flex items-center gap-3 mb-6 text-[0.7rem] md:text-xs uppercase tracking-[0.35em] text-ivory/70 font-medium">
+  <div className="reveal flex items-center gap-3 mb-4 md:mb-6 text-[0.65rem] md:text-xs uppercase tracking-[0.35em] text-ivory/70 font-medium">
     <span className="text-primary">({num})</span>
     <span>{children}</span>
     <span className="h-px flex-1 bg-ivory/15 max-w-[120px]" />
@@ -247,7 +247,7 @@ const Index = () => {
       </section>
 
       {/* HERO ============================================================== */}
-      <section className="relative min-h-screen flex items-center pt-28 pb-20 md:pt-32 md:pb-28 px-4 md:px-6 border-t border-ivory/10">
+      <section className="relative md:min-h-screen flex items-center pt-12 pb-14 md:pt-32 md:pb-28 px-4 md:px-6 border-t border-ivory/10">
         {/* decorative background */}
         <div
           aria-hidden
@@ -264,38 +264,38 @@ const Index = () => {
           style={{ backgroundColor: "hsl(var(--primary))" }}
         />
 
-        <div className="container-brand max-w-6xl mx-auto relative grid md:grid-cols-12 gap-10 md:gap-16 items-center">
+        <div className="container-brand max-w-6xl mx-auto relative grid md:grid-cols-12 gap-8 md:gap-16 items-center">
           <div className="md:col-span-7">
-            <div className="reveal flex items-center gap-3 mb-6 text-[0.7rem] md:text-xs uppercase tracking-[0.35em] text-ivory/70">
-              <span className="w-8 h-px bg-primary" />
+            <div className="reveal flex items-center gap-3 mb-4 md:mb-6 text-[0.65rem] md:text-xs uppercase tracking-[0.35em] text-ivory/70">
+              <span className="w-6 md:w-8 h-px bg-primary" />
               Mahad Persiapan Al-Azhar
             </div>
 
-            <h1 className="reveal font-display font-extrabold text-5xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight mb-6">
+            <h1 className="reveal font-display font-extrabold text-3xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight mb-4 md:mb-6">
               <span className="block text-ivory">Kokoh ilmunya,</span>
               <span className="block text-ivory">terjaga hafalannya,</span>
               <span className="block text-primary">luhur akhlaknya.</span>
             </h1>
 
-            <p className="reveal text-base md:text-lg text-ivory/70 max-w-xl leading-relaxed mb-10">
+            <p className="reveal text-sm md:text-lg text-ivory/70 max-w-xl leading-relaxed mb-6 md:mb-10">
               Markaz Rabithah adalah jembatan santri menuju Al-Azhar
               asy-Syarif — memadukan tradisi keilmuan klasik bersanad dengan
               pendampingan modern yang adaptif untuk santri Indonesia.
             </p>
 
-            <div className="reveal flex flex-wrap items-center gap-4">
+            <div className="reveal flex flex-wrap items-center gap-3 md:gap-4">
               <a
                 href="#kontak"
-                className="inline-flex items-center gap-2 px-6 md:px-7 py-3 md:py-3.5 bg-primary hover:bg-primary/90 text-ivory text-xs md:text-sm uppercase tracking-[0.25em] font-semibold rounded-sm transition-colors"
+                className="inline-flex items-center gap-2 px-4 md:px-7 py-2.5 md:py-3.5 bg-primary hover:bg-primary/90 text-ivory text-[0.65rem] md:text-sm uppercase tracking-[0.2em] md:tracking-[0.25em] font-semibold rounded-sm transition-colors"
               >
                 Daftar Santri
-                <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </a>
               <a
                 href="#filosofi"
-                className="inline-flex items-center gap-2 px-6 md:px-7 py-3 md:py-3.5 border border-ivory/20 hover:border-primary hover:text-primary text-ivory/85 text-xs md:text-sm uppercase tracking-[0.25em] font-semibold rounded-sm transition-colors"
+                className="inline-flex items-center gap-2 px-4 md:px-7 py-2.5 md:py-3.5 border border-ivory/20 hover:border-primary hover:text-primary text-ivory/85 text-[0.65rem] md:text-sm uppercase tracking-[0.2em] md:tracking-[0.25em] font-semibold rounded-sm transition-colors"
               >
                 Pelajari filosofi
               </a>
@@ -303,30 +303,30 @@ const Index = () => {
           </div>
 
           <div className="md:col-span-5 relative">
-            <div className="reveal aspect-square max-w-md mx-auto relative">
+            <div className="reveal aspect-square max-w-[260px] md:max-w-md mx-auto relative">
               <div className="absolute inset-0 rounded-full bg-primary/10 blur-2xl" />
-              <div className="absolute inset-4 md:inset-8 rounded-full border border-ivory/10" />
-              <div className="absolute inset-10 md:inset-16 rounded-full border border-ivory/10" />
+              <div className="absolute inset-3 md:inset-8 rounded-full border border-ivory/10" />
+              <div className="absolute inset-7 md:inset-16 rounded-full border border-ivory/10" />
               <img
                 src={logoMark}
                 alt="Markaz Rabithah"
                 className="absolute inset-0 m-auto w-3/5 h-auto"
               />
               <div className="absolute -top-2 -left-2 text-primary">
-                <PlusMark className="w-5 h-5" />
+                <PlusMark className="w-3.5 h-3.5 md:w-5 md:h-5" />
               </div>
               <div className="absolute -bottom-2 -right-2 text-primary">
-                <PlusMark className="w-5 h-5" />
+                <PlusMark className="w-3.5 h-3.5 md:w-5 md:h-5" />
               </div>
             </div>
 
-            <div className="reveal mt-8 grid grid-cols-3 gap-3 md:gap-5">
+            <div className="reveal mt-5 md:mt-8 grid grid-cols-3 gap-2 md:gap-5">
               {stats.map((s) => (
                 <div key={s.l} className="text-center">
-                  <div className="font-display font-bold text-xl md:text-2xl text-primary">
+                  <div className="font-display font-bold text-base md:text-2xl text-primary">
                     {s.v}
                   </div>
-                  <div className="text-[0.6rem] md:text-[0.65rem] uppercase tracking-wider text-ivory/55 mt-1 leading-snug">
+                  <div className="text-[0.55rem] md:text-[0.65rem] uppercase tracking-wider text-ivory/55 mt-1 leading-snug">
                     {s.l}
                   </div>
                 </div>
@@ -334,23 +334,17 @@ const Index = () => {
             </div>
           </div>
         </div>
-
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-primary animate-slow-pulse">
-          <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </div>
       </section>
 
       {/* TENTANG =========================================================== */}
-      <section id="tentang" className="py-20 md:py-32 px-4 md:px-6 border-t border-ivory/10">
-        <div className="container-brand max-w-6xl mx-auto grid md:grid-cols-12 gap-10 md:gap-16">
+      <section id="tentang" className="py-12 md:py-32 px-4 md:px-6 border-t border-ivory/10">
+        <div className="container-brand max-w-6xl mx-auto grid md:grid-cols-12 gap-6 md:gap-16">
           <div className="md:col-span-5">
             <Eyebrow num="01">Tentang Kami</Eyebrow>
-            <h2 className="reveal font-display font-extrabold text-3xl md:text-5xl leading-[1.05] text-ivory mb-6">
+            <h2 className="reveal font-display font-extrabold text-2xl md:text-5xl leading-[1.05] text-ivory mb-4 md:mb-6">
               Mediator yang menjaga rantai sanad tetap tersambung.
             </h2>
-            <p className="reveal text-sm md:text-base text-ivory/65 leading-relaxed">
+            <p className="reveal text-xs md:text-base text-ivory/65 leading-relaxed">
               Sebagai Mahad persiapan Al-Azhar, kami berdiri di antara semangat
               santri muda dan warisan keilmuan yang berusia lebih dari seribu
               tahun. Kurikulum kami dirancang adaptif namun tetap bersanad —
@@ -358,7 +352,7 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="md:col-span-7 grid sm:grid-cols-2 gap-6 md:gap-8">
+          <div className="md:col-span-7 grid sm:grid-cols-2 gap-3 md:gap-8">
             {[
               {
                 t: "Bersanad",
@@ -379,19 +373,19 @@ const Index = () => {
             ].map((c, i) => (
               <div
                 key={c.t}
-                className="reveal border border-ivory/10 p-6 md:p-8 hover:border-primary/40 transition-colors group"
+                className="reveal border border-ivory/10 p-4 md:p-8 hover:border-primary/40 transition-colors group"
                 style={{ transitionDelay: `${i * 60}ms` }}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <span className="text-primary text-xs md:text-sm font-bold">
+                <div className="flex items-start justify-between mb-3 md:mb-4">
+                  <span className="text-primary text-[0.65rem] md:text-sm font-bold">
                     0{i + 1}
                   </span>
-                  <PlusMark className="w-4 h-4 text-ivory/30 group-hover:text-primary group-hover:rotate-90 transition-all duration-500" />
+                  <PlusMark className="w-3.5 h-3.5 md:w-4 md:h-4 text-ivory/30 group-hover:text-primary group-hover:rotate-90 transition-all duration-500" />
                 </div>
-                <h3 className="font-display font-bold text-lg md:text-xl text-ivory mb-2">
+                <h3 className="font-display font-bold text-base md:text-xl text-ivory mb-1.5 md:mb-2">
                   {c.t}
                 </h3>
-                <p className="text-xs md:text-sm text-ivory/60 leading-relaxed">
+                <p className="text-[0.7rem] md:text-sm text-ivory/60 leading-relaxed">
                   {c.d}
                 </p>
               </div>
@@ -401,7 +395,7 @@ const Index = () => {
       </section>
 
       {/* FILOSOFI ========================================================== */}
-      <section id="filosofi" className="py-20 md:py-32 px-4 md:px-6 border-t border-ivory/10 relative">
+      <section id="filosofi" className="py-12 md:py-32 px-4 md:px-6 border-t border-ivory/10 relative">
         <div
           aria-hidden
           className="absolute right-0 top-0 bottom-0 w-1/2 opacity-[0.04] pointer-events-none"
@@ -413,31 +407,31 @@ const Index = () => {
         />
         <div className="container-brand max-w-6xl mx-auto relative">
           <Eyebrow num="02">Filosofi Nama</Eyebrow>
-          <h2 className="reveal font-display font-extrabold text-3xl md:text-6xl leading-[1.05] text-ivory max-w-3xl mb-16 md:mb-20">
+          <h2 className="reveal font-display font-extrabold text-2xl md:text-6xl leading-[1.05] text-ivory max-w-3xl mb-8 md:mb-20">
             Dua kata,{" "}
             <span className="text-primary">satu arah gerak.</span>
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-10 md:gap-20">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-20">
             <div className="reveal">
-              <div className="flex items-baseline gap-4 mb-5">
-                <span className="font-display font-extrabold text-primary text-5xl md:text-7xl leading-none">
+              <div className="flex items-baseline gap-3 md:gap-4 mb-3 md:mb-5">
+                <span className="font-display font-extrabold text-primary text-4xl md:text-7xl leading-none">
                   01
                 </span>
-                <h3 className="font-display font-bold text-2xl md:text-3xl text-ivory">
+                <h3 className="font-display font-bold text-xl md:text-3xl text-ivory">
                   Markaz
                 </h3>
               </div>
-              <p className="text-[0.7rem] md:text-xs uppercase tracking-[0.3em] text-primary/80 mb-4">
+              <p className="text-[0.65rem] md:text-xs uppercase tracking-[0.3em] text-primary/80 mb-3 md:mb-4">
                 /مَرْكَز/ · Pusat
               </p>
-              <p className="text-sm md:text-base text-ivory/70 leading-relaxed">
+              <p className="text-xs md:text-base text-ivory/70 leading-relaxed">
                 Markaz adalah <span className="text-ivory">titik orbit</span> —
                 tempat ilmu berkumpul sebelum ia menyebar. Ia memberi arah bagi
                 setiap langkah santri: dari mana ia berangkat, ke mana ia
                 menuju, dan dengan ilmu apa ia kembali.
               </p>
-              <ul className="mt-6 space-y-2 text-xs md:text-sm text-ivory/55">
+              <ul className="mt-4 md:mt-6 space-y-1.5 md:space-y-2 text-[0.7rem] md:text-sm text-ivory/55">
                 <li className="flex gap-2"><span className="text-primary">·</span> Pusat pembelajaran ilmu alat</li>
                 <li className="flex gap-2"><span className="text-primary">·</span> Pusat tahsin dan tahfizh</li>
                 <li className="flex gap-2"><span className="text-primary">·</span> Pusat tarbiyah adab dan akhlak</li>
@@ -445,25 +439,25 @@ const Index = () => {
             </div>
 
             <div className="reveal" style={{ transitionDelay: "120ms" }}>
-              <div className="flex items-baseline gap-4 mb-5">
-                <span className="font-display font-extrabold text-primary text-5xl md:text-7xl leading-none">
+              <div className="flex items-baseline gap-3 md:gap-4 mb-3 md:mb-5">
+                <span className="font-display font-extrabold text-primary text-4xl md:text-7xl leading-none">
                   02
                 </span>
-                <h3 className="font-display font-bold text-2xl md:text-3xl text-ivory">
+                <h3 className="font-display font-bold text-xl md:text-3xl text-ivory">
                   Rabithah
                 </h3>
               </div>
-              <p className="text-[0.7rem] md:text-xs uppercase tracking-[0.3em] text-primary/80 mb-4">
+              <p className="text-[0.65rem] md:text-xs uppercase tracking-[0.3em] text-primary/80 mb-3 md:mb-4">
                 /رَابِطَة/ · Ikatan
               </p>
-              <p className="text-sm md:text-base text-ivory/70 leading-relaxed">
+              <p className="text-xs md:text-base text-ivory/70 leading-relaxed">
                 Rabithah adalah{" "}
                 <span className="text-ivory">tali yang mengikat tiga simpul</span>
                 : santri, ulama, dan Al-Azhar asy-Syarif. Ia menjaga
                 transmisi ilmu tetap bersambung — sanad tidak terputus, ruh
                 tidak hilang.
               </p>
-              <ul className="mt-6 space-y-2 text-xs md:text-sm text-ivory/55">
+              <ul className="mt-4 md:mt-6 space-y-1.5 md:space-y-2 text-[0.7rem] md:text-sm text-ivory/55">
                 <li className="flex gap-2"><span className="text-primary">·</span> Ikatan dengan masyayikh dan ulama sanad</li>
                 <li className="flex gap-2"><span className="text-primary">·</span> Ikatan dengan tradisi keilmuan Al-Azhar</li>
                 <li className="flex gap-2"><span className="text-primary">·</span> Ikatan persaudaraan antar santri</li>
@@ -472,11 +466,11 @@ const Index = () => {
           </div>
 
           {/* arabic kaligrafi quote */}
-          <div className="reveal mt-16 md:mt-24 border-y border-ivory/10 py-10 md:py-14 text-center">
-            <p className="font-serif text-2xl md:text-4xl text-ivory mb-4 leading-relaxed" dir="rtl">
+          <div className="reveal mt-10 md:mt-24 border-y border-ivory/10 py-7 md:py-14 text-center">
+            <p className="font-serif text-xl md:text-4xl text-ivory mb-3 md:mb-4 leading-relaxed" dir="rtl">
               العِلْمُ نُورٌ، وَالسَّنَدُ حَبْلٌ لَا يَنْقَطِعُ
             </p>
-            <p className="text-xs md:text-sm text-ivory/55 italic">
+            <p className="text-[0.7rem] md:text-sm text-ivory/55 italic">
               "Ilmu adalah cahaya, dan sanad adalah tali yang tidak putus."
             </p>
           </div>
@@ -484,10 +478,10 @@ const Index = () => {
       </section>
 
       {/* PILAR MISI ======================================================== */}
-      <section id="pilar" className="py-20 md:py-32 px-4 md:px-6 border-t border-ivory/10">
+      <section id="pilar" className="py-12 md:py-32 px-4 md:px-6 border-t border-ivory/10">
         <div className="container-brand max-w-6xl mx-auto">
           <Eyebrow num="03">Pilar Misi</Eyebrow>
-          <h2 className="reveal font-display font-extrabold text-3xl md:text-6xl leading-[1.05] text-ivory max-w-3xl mb-12 md:mb-16">
+          <h2 className="reveal font-display font-extrabold text-2xl md:text-6xl leading-[1.05] text-ivory max-w-3xl mb-8 md:mb-16">
             Empat pondasi,{" "}
             <span className="text-primary">satu santri utuh.</span>
           </h2>
@@ -496,21 +490,21 @@ const Index = () => {
             {missions.map((m, i) => (
               <div
                 key={m.t}
-                className="reveal group relative bg-background p-7 md:p-12 transition-colors duration-500 hover:bg-navy-light/40"
+                className="reveal group relative bg-background p-5 md:p-12 transition-colors duration-500 hover:bg-navy-light/40"
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
-                <div className="flex items-start justify-between mb-8 md:mb-12">
-                  <span className="font-display font-extrabold text-primary text-3xl md:text-5xl">
+                <div className="flex items-start justify-between mb-5 md:mb-12">
+                  <span className="font-display font-extrabold text-primary text-2xl md:text-5xl">
                     {m.n}
                   </span>
-                  <span className="font-serif text-xl md:text-2xl text-ivory/50 group-hover:text-primary transition-colors" dir="rtl">
+                  <span className="font-serif text-lg md:text-2xl text-ivory/50 group-hover:text-primary transition-colors" dir="rtl">
                     {m.ar}
                   </span>
                 </div>
-                <h3 className="font-display font-bold text-xl md:text-3xl text-ivory mb-3 md:mb-4">
+                <h3 className="font-display font-bold text-lg md:text-3xl text-ivory mb-2 md:mb-4">
                   {m.t}
                 </h3>
-                <p className="text-sm md:text-base text-ivory/65 leading-relaxed max-w-md">
+                <p className="text-xs md:text-base text-ivory/65 leading-relaxed max-w-md">
                   {m.d}
                 </p>
               </div>
@@ -520,27 +514,27 @@ const Index = () => {
       </section>
 
       {/* PROGRAM =========================================================== */}
-      <section id="program" className="py-20 md:py-32 px-4 md:px-6 border-t border-ivory/10">
+      <section id="program" className="py-12 md:py-32 px-4 md:px-6 border-t border-ivory/10">
         <div className="container-brand max-w-6xl mx-auto">
           <Eyebrow num="04">Program Pembelajaran</Eyebrow>
-          <h2 className="reveal font-display font-extrabold text-3xl md:text-6xl leading-[1.05] text-ivory max-w-3xl mb-12 md:mb-16">
+          <h2 className="reveal font-display font-extrabold text-2xl md:text-6xl leading-[1.05] text-ivory max-w-3xl mb-8 md:mb-16">
             Persiapan menyeluruh, <span className="text-primary">terstruktur.</span>
           </h2>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
             {program.map((p, i) => (
               <div
                 key={p.t}
-                className="reveal border border-ivory/10 p-6 md:p-7 hover:border-primary/40 hover:bg-navy-light/30 transition-all"
+                className="reveal border border-ivory/10 p-4 md:p-7 hover:border-primary/40 hover:bg-navy-light/30 transition-all"
                 style={{ transitionDelay: `${i * 50}ms` }}
               >
-                <div className="text-primary text-xs font-bold mb-3">
+                <div className="text-primary text-[0.65rem] md:text-xs font-bold mb-2 md:mb-3">
                   0{i + 1}
                 </div>
-                <h3 className="font-display font-bold text-base md:text-lg text-ivory mb-2">
+                <h3 className="font-display font-bold text-sm md:text-lg text-ivory mb-1.5 md:mb-2">
                   {p.t}
                 </h3>
-                <p className="text-xs md:text-sm text-ivory/60 leading-relaxed">
+                <p className="text-[0.7rem] md:text-sm text-ivory/60 leading-relaxed">
                   {p.d}
                 </p>
               </div>
@@ -550,28 +544,28 @@ const Index = () => {
       </section>
 
       {/* IDENTITAS VISUAL ================================================== */}
-      <section id="identitas" className="py-20 md:py-32 px-4 md:px-6 border-t border-ivory/10">
+      <section id="identitas" className="py-12 md:py-32 px-4 md:px-6 border-t border-ivory/10">
         <div className="container-brand max-w-6xl mx-auto">
           <Eyebrow num="05">Identitas Visual</Eyebrow>
-          <h2 className="reveal font-display font-extrabold text-3xl md:text-6xl leading-[1.05] text-ivory max-w-3xl mb-12 md:mb-16">
+          <h2 className="reveal font-display font-extrabold text-2xl md:text-6xl leading-[1.05] text-ivory max-w-3xl mb-8 md:mb-16">
             Bahasa visual <span className="text-primary">yang jujur.</span>
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-6 md:gap-10 mb-12">
-            <div className="reveal aspect-[4/3] bg-navy-light/40 border border-ivory/10 flex items-center justify-center p-10">
+          <div className="grid md:grid-cols-2 gap-3 md:gap-10 mb-8 md:mb-12">
+            <div className="reveal aspect-[4/3] bg-navy-light/40 border border-ivory/10 flex items-center justify-center p-6 md:p-10">
               <img src={logo} alt="Logo on dark" className="max-w-[80%] h-auto" />
             </div>
-            <div className="reveal aspect-[4/3] bg-ivory flex items-center justify-center p-10">
+            <div className="reveal aspect-[4/3] bg-ivory flex items-center justify-center p-6 md:p-10">
               <img src={logo} alt="Logo on light" className="max-w-[80%] h-auto" />
             </div>
           </div>
 
           {/* color palette */}
-          <div className="reveal mb-10">
-            <div className="text-[0.65rem] md:text-xs uppercase tracking-[0.3em] text-ivory/60 mb-5">
+          <div className="reveal mb-6 md:mb-10">
+            <div className="text-[0.6rem] md:text-xs uppercase tracking-[0.3em] text-ivory/60 mb-3 md:mb-5">
               Palet Warna
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
               {[
                 { name: "Deep Navy", hex: "#0A1D37", c: "#0A1D37", text: "text-ivory" },
                 { name: "Crimson Tarbush", hex: "#B22222", c: "#B22222", text: "text-ivory" },
@@ -580,15 +574,15 @@ const Index = () => {
               ].map((c) => (
                 <div
                   key={c.name}
-                  className={`p-5 md:p-6 h-28 md:h-36 flex flex-col justify-between ${c.text}`}
+                  className={`p-3 md:p-6 h-20 md:h-36 flex flex-col justify-between ${c.text}`}
                   style={{ backgroundColor: c.c }}
                 >
-                  <div className="text-[0.55rem] md:text-[0.6rem] uppercase tracking-wider opacity-70">
+                  <div className="text-[0.5rem] md:text-[0.6rem] uppercase tracking-wider opacity-70">
                     Brand
                   </div>
                   <div>
-                    <div className="font-display font-bold text-sm md:text-base">{c.name}</div>
-                    <div className="text-[0.65rem] md:text-xs mt-1 opacity-80">{c.hex}</div>
+                    <div className="font-display font-bold text-xs md:text-base">{c.name}</div>
+                    <div className="text-[0.6rem] md:text-xs mt-0.5 md:mt-1 opacity-80">{c.hex}</div>
                   </div>
                 </div>
               ))}
@@ -596,20 +590,20 @@ const Index = () => {
           </div>
 
           {/* typography */}
-          <div className="reveal border border-ivory/10 p-6 md:p-10">
-            <div className="text-[0.65rem] md:text-xs uppercase tracking-[0.3em] text-ivory/60 mb-5">
+          <div className="reveal border border-ivory/10 p-4 md:p-10">
+            <div className="text-[0.6rem] md:text-xs uppercase tracking-[0.3em] text-ivory/60 mb-3 md:mb-5">
               Tipografi
             </div>
-            <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
+            <div className="grid md:grid-cols-2 gap-5 md:gap-12 items-start">
               <div>
-                <div className="font-display font-extrabold text-5xl md:text-7xl text-primary leading-none">
+                <div className="font-display font-extrabold text-4xl md:text-7xl text-primary leading-none">
                   Inter
                 </div>
-                <div className="mt-3 text-xs md:text-sm text-ivory/60">
+                <div className="mt-2 md:mt-3 text-[0.7rem] md:text-sm text-ivory/60">
                   Display & Body — geometris, ringkas, modern.
                 </div>
               </div>
-              <div className="text-base md:text-lg text-ivory/85 font-medium leading-relaxed">
+              <div className="text-sm md:text-lg text-ivory/85 font-medium leading-relaxed">
                 <div>Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll</div>
                 <div>Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww</div>
                 <div>Xx Yy Zz · 1234567890</div>
@@ -622,7 +616,7 @@ const Index = () => {
       {/* CTA / KONTAK ====================================================== */}
       <section
         id="kontak"
-        className="py-20 md:py-32 px-4 md:px-6 border-t border-ivory/10 relative overflow-hidden"
+        className="py-12 md:py-32 px-4 md:px-6 border-t border-ivory/10 relative overflow-hidden"
       >
         <div
           aria-hidden
@@ -630,45 +624,45 @@ const Index = () => {
           style={{ backgroundColor: "hsl(var(--primary))" }}
         />
         <div className="container-brand max-w-4xl mx-auto text-center relative">
-          <div className="reveal text-primary mb-6 flex justify-center">
-            <PlusMark className="w-7 h-7" />
+          <div className="reveal text-primary mb-4 md:mb-6 flex justify-center">
+            <PlusMark className="w-5 h-5 md:w-7 md:h-7" />
           </div>
-          <h2 className="reveal font-display font-extrabold text-3xl md:text-6xl leading-[1.05] text-ivory mb-6">
+          <h2 className="reveal font-display font-extrabold text-2xl md:text-6xl leading-[1.05] text-ivory mb-4 md:mb-6">
             Mulai perjalanan ilmumu <br />
             <span className="text-primary">bersama kami.</span>
           </h2>
-          <p className="reveal text-sm md:text-base text-ivory/65 max-w-xl mx-auto mb-10 leading-relaxed">
+          <p className="reveal text-xs md:text-base text-ivory/65 max-w-xl mx-auto mb-6 md:mb-10 leading-relaxed">
             Pendaftaran santri Markaz Rabithah dibuka setiap angkatan.
             Hubungi kami untuk konsultasi program, jadwal, dan persiapan
             dokumen.
           </p>
-          <div className="reveal flex flex-wrap items-center justify-center gap-4">
+          <div className="reveal flex flex-wrap items-center justify-center gap-3 md:gap-4">
             <a
               href="https://wa.me/6280000000000"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary hover:bg-primary/90 text-ivory text-xs md:text-sm uppercase tracking-[0.25em] font-semibold rounded-sm transition-colors"
+              className="inline-flex items-center gap-2 px-4 md:px-7 py-2.5 md:py-3.5 bg-primary hover:bg-primary/90 text-ivory text-[0.65rem] md:text-sm uppercase tracking-[0.2em] md:tracking-[0.25em] font-semibold rounded-sm transition-colors"
             >
               Hubungi via WhatsApp
             </a>
             <a
               href="mailto:info@markazrabithah.id"
-              className="inline-flex items-center gap-2 px-7 py-3.5 border border-ivory/20 hover:border-primary hover:text-primary text-ivory/85 text-xs md:text-sm uppercase tracking-[0.25em] font-semibold rounded-sm transition-colors"
+              className="inline-flex items-center gap-2 px-4 md:px-7 py-2.5 md:py-3.5 border border-ivory/20 hover:border-primary hover:text-primary text-ivory/85 text-[0.65rem] md:text-sm uppercase tracking-[0.2em] md:tracking-[0.25em] font-semibold rounded-sm transition-colors"
             >
               info@markazrabithah.id
             </a>
           </div>
 
-          <div className="reveal mt-16 grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-10 text-left max-w-3xl mx-auto pt-10 border-t border-ivory/10">
+          <div className="reveal mt-10 md:mt-16 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-10 text-left max-w-3xl mx-auto pt-6 md:pt-10 border-t border-ivory/10">
             <div>
-              <div className="text-[0.65rem] uppercase tracking-[0.3em] text-ivory/50 mb-2">Lokasi</div>
-              <div className="text-sm text-ivory/85 font-medium">Indonesia</div>
+              <div className="text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.3em] text-ivory/50 mb-1.5 md:mb-2">Lokasi</div>
+              <div className="text-xs md:text-sm text-ivory/85 font-medium">Indonesia</div>
             </div>
             <div>
-              <div className="text-[0.65rem] uppercase tracking-[0.3em] text-ivory/50 mb-2">Pendaftaran</div>
-              <div className="text-sm text-ivory/85 font-medium">Setiap angkatan</div>
+              <div className="text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.3em] text-ivory/50 mb-1.5 md:mb-2">Pendaftaran</div>
+              <div className="text-xs md:text-sm text-ivory/85 font-medium">Setiap angkatan</div>
             </div>
             <div className="col-span-2 md:col-span-1">
-              <div className="text-[0.65rem] uppercase tracking-[0.3em] text-ivory/50 mb-2">Sosial</div>
-              <div className="flex gap-4 text-sm text-ivory/85 font-medium">
+              <div className="text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.3em] text-ivory/50 mb-1.5 md:mb-2">Sosial</div>
+              <div className="flex gap-4 text-xs md:text-sm text-ivory/85 font-medium">
                 <a href="#" className="hover:text-primary">Instagram</a>
                 <a href="#" className="hover:text-primary">YouTube</a>
               </div>
@@ -678,13 +672,13 @@ const Index = () => {
       </section>
 
       {/* FOOTER ============================================================ */}
-      <footer className="border-t border-ivory/10 py-8 px-4 md:px-6">
-        <div className="container-brand max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-[0.65rem] md:text-xs text-ivory/50">
+      <footer className="border-t border-ivory/10 py-5 md:py-8 px-4 md:px-6">
+        <div className="container-brand max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4 text-[0.6rem] md:text-xs text-ivory/50">
           <div className="flex items-center gap-3">
-            <img src={logoMark} alt="" className="w-5 h-5 object-contain" />
+            <img src={logoMark} alt="" className="w-4 h-4 md:w-5 md:h-5 object-contain" />
             <span>© 2026 Markaz Rabithah · Mahad Persiapan Al-Azhar</span>
           </div>
-          <div className="flex gap-5">
+          <div className="flex gap-4 md:gap-5">
             <a href="#filosofi" className="hover:text-primary">Filosofi</a>
             <a href="#pilar" className="hover:text-primary">Pilar Misi</a>
             <a href="#kontak" className="hover:text-primary">Kontak</a>
