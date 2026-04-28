@@ -104,7 +104,7 @@ const Index = () => {
       </section>
 
       {/* WELCOME / INTRO ====================================================== */}
-      <section className="py-14 md:py-40 px-4 md:px-6">
+      <section className="section-light py-14 md:py-40 px-4 md:px-6">
         <div className="container-brand max-w-5xl text-center">
           <Eyebrow num="2">Tentang kami</Eyebrow>
 
@@ -168,7 +168,7 @@ const Index = () => {
       </section>
 
       {/* FILOSOFI ============================================================ */}
-      <section id="filosofi" className="py-14 md:py-40 px-4 md:px-6 border-t border-border/30">
+      <section id="filosofi" className="section-navy-light py-14 md:py-40 px-4 md:px-6 border-t border-border/30">
         <div className="container-brand">
           <Eyebrow num="03">Filosofi nama</Eyebrow>
           <h2 className="reveal heading-huge text-ivory text-4xl md:text-7xl mb-12 md:mb-24 max-w-4xl">
@@ -229,7 +229,7 @@ const Index = () => {
       </section>
 
       {/* PALET WARNA ========================================================= */}
-      <section id="warna" className="py-14 md:py-40 px-4 md:px-6 border-t border-border/30">
+      <section id="warna" className="section-light py-14 md:py-40 px-4 md:px-6 border-t border-border/30">
         <div className="container-brand">
           <Eyebrow num="05">Palet warna</Eyebrow>
           <h2 className="reveal heading-huge text-ivory text-4xl md:text-7xl mb-4 md:mb-6 max-w-4xl">
@@ -296,7 +296,7 @@ const Index = () => {
       </section>
 
       {/* TIPOGRAFI =========================================================== */}
-      <section id="tipografi" className="py-14 md:py-40 px-4 md:px-6 border-t border-border/30">
+      <section id="tipografi" className="section-navy-light py-14 md:py-40 px-4 md:px-6 border-t border-border/30">
         <div className="container-brand">
           <Eyebrow num="06">Tipografi</Eyebrow>
           <h2 className="reveal heading-huge text-ivory text-4xl md:text-7xl mb-10 md:mb-20 max-w-4xl">
