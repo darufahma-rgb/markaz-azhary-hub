@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import logo from "@assets/Markaz_Rabithah_Logo_1_1777345170344.png";
 import logoMark from "@assets/Logo_Markaz_Rabithah_2_1777345186295.png";
+import logoOnCrimson from "@assets/Logo_Markaz_Rabithah_on_crimson_1777348637704.png";
+import logoOnIvory from "@assets/Logo_Markaz_Rabithah_on_ivory_1777348637704.png";
 import { useReveal } from "@/hooks/use-reveal";
 
 // ---- Small UI atoms ---------------------------------------------------------
@@ -869,16 +871,16 @@ const Index = () => {
       >
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-ivory/10 border border-ivory/10">
           {[
-            { bg: "hsl(var(--navy-deep))", label: "On Navy", textOnLight: false },
-            { bg: "#B22222", label: "On Crimson", textOnLight: false },
-            { bg: "#F4EEE4", label: "On Ivory", textOnLight: true },
+            { bg: "hsl(var(--navy-deep))", label: "On Navy", src: logo, textOnLight: false },
+            { bg: "#B22222", label: "On Crimson", src: logoOnCrimson, textOnLight: false },
+            { bg: "#F4EEE4", label: "On Ivory", src: logoOnIvory, textOnLight: true },
           ].map((v) => (
             <div
               key={v.label}
               className="relative aspect-[4/3] md:aspect-square flex items-center justify-center p-6 md:p-10"
               style={{ backgroundColor: v.bg }}
             >
-              <img src={logo} alt={`Logo ${v.label}`} className="w-3/4 h-auto object-contain" />
+              <img src={v.src} alt={`Logo ${v.label}`} className="w-3/4 h-auto object-contain" />
               <div
                 className="absolute bottom-3 left-3 md:bottom-4 md:left-4 text-[0.55rem] md:text-[0.65rem] uppercase tracking-[0.3em] font-medium opacity-70"
                 style={{ color: v.textOnLight ? "hsl(var(--navy-deep))" : "rgb(244 238 228)" }}
@@ -893,7 +895,7 @@ const Index = () => {
           <div className="relative bg-background flex items-center justify-center p-8 md:p-12 aspect-[4/3] md:aspect-[2/1]">
             <img src={logoMark} alt="Logo Mark" className="w-1/2 h-auto object-contain" />
             <div className="absolute bottom-3 left-3 md:bottom-4 md:left-4 text-[0.55rem] md:text-[0.65rem] uppercase tracking-[0.3em] text-ivory/60 font-medium">
-              Mark Only
+              Mark · Navy
             </div>
           </div>
           <div className="relative flex items-center justify-center p-8 md:p-12 aspect-[4/3] md:aspect-[2/1]" style={{ backgroundColor: "#F4EEE4" }}>
