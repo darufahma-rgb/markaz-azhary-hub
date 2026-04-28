@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import logo from "@/assets/logo-markaz-rabithah.png";
-import logoMark from "@assets/Markaz_Rabithah_Logo_1_1777342798764.png";
+import logo from "@assets/Markaz_Rabithah_Logo_1_1777345170344.png";
+import logoMark from "@assets/Logo_Markaz_Rabithah_2_1777345186295.png";
 import { useReveal } from "@/hooks/use-reveal";
 
 // ---- Small UI atoms ---------------------------------------------------------
