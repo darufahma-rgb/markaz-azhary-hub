@@ -347,19 +347,19 @@ const Index = () => {
             ].map((c, i) => (
               <div
                 key={c.t}
-                className="reveal border border-ivory/10 p-4 md:p-8 hover:border-primary/40 transition-colors group"
+                className="reveal border border-ivory/10 p-3 md:p-5 hover:border-primary/40 transition-colors group"
                 style={{ transitionDelay: `${i * 60}ms` }}
               >
-                <div className="flex items-start justify-between mb-3 md:mb-4">
+                <div className="flex items-start justify-between mb-2 md:mb-3">
                   <span className="text-primary text-[0.65rem] md:text-sm font-bold">
                     0{i + 1}
                   </span>
-                  <PlusMark className="w-3.5 h-3.5 md:w-4 md:h-4 text-ivory/30 group-hover:text-primary group-hover:rotate-90 transition-all duration-500" />
+                  <PlusMark className="w-3 h-3 md:w-3.5 md:h-3.5 text-ivory/30 group-hover:text-primary group-hover:rotate-90 transition-all duration-500" />
                 </div>
-                <h3 className="font-display font-bold text-base md:text-xl text-ivory mb-1.5 md:mb-2">
+                <h3 className="font-display font-bold text-sm md:text-lg text-ivory mb-1 md:mb-1.5">
                   {c.t}
                 </h3>
-                <p className="text-[0.7rem] md:text-sm text-ivory/60 leading-relaxed">
+                <p className="text-[0.7rem] md:text-xs text-ivory/60 leading-relaxed">
                   {c.d}
                 </p>
               </div>
@@ -464,21 +464,21 @@ const Index = () => {
             {missions.map((m, i) => (
               <div
                 key={m.t}
-                className="reveal group relative bg-background p-5 md:p-12 transition-colors duration-500 hover:bg-navy-light/40"
+                className="reveal group relative bg-background p-4 md:p-7 transition-colors duration-500 hover:bg-navy-light/40"
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
-                <div className="flex items-start justify-between mb-5 md:mb-12">
-                  <span className="font-display font-extrabold text-primary text-2xl md:text-5xl">
+                <div className="flex items-start justify-between mb-3 md:mb-6">
+                  <span className="font-display font-extrabold text-primary text-xl md:text-4xl">
                     {m.n}
                   </span>
-                  <span className="font-arabic text-2xl md:text-4xl text-ivory/55 group-hover:text-primary transition-colors leading-none" dir="rtl">
+                  <span className="font-arabic text-xl md:text-3xl text-ivory/55 group-hover:text-primary transition-colors leading-none" dir="rtl">
                     {m.ar}
                   </span>
                 </div>
-                <h3 className="font-display font-bold text-lg md:text-3xl text-ivory mb-2 md:mb-4">
+                <h3 className="font-display font-bold text-base md:text-2xl text-ivory mb-1.5 md:mb-2.5">
                   {m.t}
                 </h3>
-                <p className="text-xs md:text-base text-ivory/65 leading-relaxed max-w-md">
+                <p className="text-[0.7rem] md:text-sm text-ivory/65 leading-relaxed max-w-md">
                   {m.d}
                 </p>
               </div>
@@ -499,16 +499,16 @@ const Index = () => {
             {program.map((p, i) => (
               <div
                 key={p.t}
-                className="reveal border border-ivory/10 p-4 md:p-7 hover:border-primary/40 hover:bg-navy-light/30 transition-all"
+                className="reveal border border-ivory/10 p-3 md:p-5 hover:border-primary/40 hover:bg-navy-light/30 transition-all"
                 style={{ transitionDelay: `${i * 50}ms` }}
               >
-                <div className="text-primary text-[0.65rem] md:text-xs font-bold mb-2 md:mb-3">
+                <div className="text-primary text-[0.65rem] md:text-xs font-bold mb-1.5 md:mb-2">
                   0{i + 1}
                 </div>
-                <h3 className="font-display font-bold text-sm md:text-lg text-ivory mb-1.5 md:mb-2">
+                <h3 className="font-display font-bold text-sm md:text-base text-ivory mb-1 md:mb-1.5">
                   {p.t}
                 </h3>
-                <p className="text-[0.7rem] md:text-sm text-ivory/60 leading-relaxed">
+                <p className="text-[0.7rem] md:text-xs text-ivory/60 leading-relaxed">
                   {p.d}
                 </p>
               </div>
@@ -544,7 +544,7 @@ const Index = () => {
               ].map((c) => (
                 <div
                   key={c.name}
-                  className={`p-3 md:p-6 h-20 md:h-36 flex flex-col justify-between ${c.text}`}
+                  className={`p-2.5 md:p-4 h-16 md:h-24 flex flex-col justify-between ${c.text}`}
                   style={{ backgroundColor: c.c }}
                 >
                   <div className="text-[0.5rem] md:text-[0.6rem] uppercase tracking-wider opacity-70">
@@ -560,20 +560,20 @@ const Index = () => {
           </div>
 
           {/* typography */}
-          <div className="reveal border border-ivory/10 p-4 md:p-10">
-            <div className="text-[0.6rem] md:text-xs uppercase tracking-[0.3em] text-ivory/60 mb-3 md:mb-5">
+          <div className="reveal border border-ivory/10 p-3 md:p-6">
+            <div className="text-[0.6rem] md:text-xs uppercase tracking-[0.3em] text-ivory/60 mb-2 md:mb-4">
               Tipografi
             </div>
-            <div className="grid md:grid-cols-2 gap-5 md:gap-12 items-start">
+            <div className="grid md:grid-cols-2 gap-4 md:gap-8 items-start">
               <div>
-                <div className="font-display font-extrabold text-3xl md:text-6xl text-primary leading-none">
+                <div className="font-display font-extrabold text-2xl md:text-4xl text-primary leading-none">
                   Sk Modernist
                 </div>
-                <div className="mt-2 md:mt-3 text-[0.7rem] md:text-sm text-ivory/60">
+                <div className="mt-1.5 md:mt-2 text-[0.7rem] md:text-xs text-ivory/60">
                   Display & Body — geometris, ringkas, modern.
                 </div>
               </div>
-              <div className="text-sm md:text-lg text-ivory/85 font-medium leading-relaxed">
+              <div className="text-xs md:text-base text-ivory/85 font-medium leading-relaxed">
                 <div>Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll</div>
                 <div>Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww</div>
                 <div>Xx Yy Zz · 1234567890</div>
