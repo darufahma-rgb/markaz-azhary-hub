@@ -302,12 +302,20 @@
   .section-navy-light .bg-background { background-color: hsl(var(--navy-light)) !important; }
 }
 
-/* Geometos-like fallback using a strong geometric stack. We label the display font
-   'Geometos' so branding reads correctly; the stack ensures graceful fallback. */
+/* Geometos display font for Markaz Rabithah branding.
+   Tries the locally installed Geometos first (if the user/designer has it),
+   then falls back to a self-hosted OTF if dropped into /fonts/Geometos.otf,
+   and finally to Sora (loaded from Google Fonts) — the closest free
+   geometric sans-serif so the brand keeps its bold geometric feel. */
 @font-face {
   font-family: 'Geometos';
-  src: local('Geometos'), local('Montserrat ExtraBold'), local('Futura');
-  font-weight: 700;
+  src:
+    local('Geometos'),
+    url('/fonts/Geometos.otf') format('opentype'),
+    local('Sora ExtraBold'),
+    local('Montserrat ExtraBold'),
+    local('Futura');
+  font-weight: 700 900;
   font-style: normal;
   font-display: swap;
 }

@@ -1,9 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": null,
-  "installCommand": "pnpm install --frozen-lockfile --ignore-scripts",
-  "buildCommand": "pnpm --filter @workspace/markaz-rabithah... run build",
-  "outputDirectory": "artifacts/markaz-rabithah/dist",
+  "framework": "vite",
+  "buildCommand": "vite build --config vite.config.ts",
+  "outputDirectory": "dist",
   "rewrites": [
     { "source": "/((?!assets/|fonts/|favicon|apple-touch-icon|opengraph|robots).*)", "destination": "/index.html" }
   ],

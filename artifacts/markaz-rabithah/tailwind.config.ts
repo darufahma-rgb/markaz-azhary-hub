@@ -16,6 +16,7 @@ export default {
         sans: ["'Sk Modernist'", "Inter", "system-ui", "sans-serif"],
         serif: ["'Sk Modernist'", "Inter", "system-ui", "sans-serif"],
         arabic: ["'Qahwa Arabic'", "'Amiri'", "'Scheherazade New'", "serif"],
+        geometos: ["'Geometos'", "'Sora'", "'Montserrat'", "Inter", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
