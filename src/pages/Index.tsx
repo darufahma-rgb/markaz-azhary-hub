@@ -87,17 +87,12 @@ const Index = () => {
 
       {/* HERO ================================================================ */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-4 md:px-6">
-        <div ref={heroRef} className="relative z-10 flex flex-col items-center">
-          <div className="flex items-center gap-3 md:gap-10">
-            <img
-              src={logo}
-              alt="Markaz Rabithah logo"
-              className="w-12 md:w-28 h-auto"
-            />
-            <h1 className="heading-huge text-ivory text-3xl md:text-7xl">
-              markaz<br />rabithah<sup className="text-primary text-base md:text-3xl align-top ml-1">®</sup>
-            </h1>
-          </div>
+        <div ref={heroRef} className="relative z-10 flex items-center justify-center">
+          <img
+            src={logo}
+            alt="Markaz Rabithah logo"
+            className="w-40 md:w-80 h-auto"
+          />
         </div>
 
         {/* scroll chevron */}
