@@ -2,8 +2,10 @@
 .cache/
 .migration-backup/
 .agents/
+attached_assets/
 screenshots/
-artifacts/
+artifacts/api-server/
+artifacts/mockup-sandbox/
 lib/
 scripts/
 *.py
@@ -13,5 +15,3 @@ uv.lock
 replit.md
 .replit
 .replitignore
-pnpm-workspace.yaml
-tsconfig.base.json
