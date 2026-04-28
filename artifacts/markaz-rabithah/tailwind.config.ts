@@ -12,9 +12,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ["Geometos", "Montserrat", "Inter", "system-ui", "sans-serif"],
-        sans: ["Inter", "system-ui", "sans-serif"],
-        serif: ["'Cormorant Garamond'", "Georgia", "serif"],
+        display: ["'Sk Modernist'", "Inter", "system-ui", "sans-serif"],
+        sans: ["'Sk Modernist'", "Inter", "system-ui", "sans-serif"],
+        serif: ["'Sk Modernist'", "Inter", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

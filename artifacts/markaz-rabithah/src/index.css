@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Sk Modernist";
+  src: url("/fonts/SkModernist-Bold.otf") format("opentype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Markaz Rabithah — Azhary Modern Design System
    All colors MUST be HSL.
 */
@@ -99,21 +107,21 @@
   }
 
   .heading-display {
-    font-family: 'Inter', 'Geometos', system-ui, sans-serif;
+    font-family: 'Sk Modernist', 'Inter', system-ui, sans-serif;
     letter-spacing: -0.03em;
     font-weight: 800;
     line-height: 0.95;
   }
 
   .heading-huge {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Sk Modernist', 'Inter', system-ui, sans-serif;
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 0.9;
   }
 
   .heading-serif {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Sk Modernist', 'Inter', system-ui, sans-serif;
     font-weight: 700;
     font-style: italic;
     letter-spacing: -0.02em;
