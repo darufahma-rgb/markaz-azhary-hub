@@ -53,37 +53,41 @@ const Nav = () => {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/80 backdrop-blur-md border-b border-ivory/10 py-3"
-          : "bg-transparent py-5"
+      className={`fixed inset-x-0 z-50 px-3 md:px-6 transition-all duration-300 ${
+        scrolled ? "top-3 md:top-4" : "top-4 md:top-6"
       }`}
     >
-      <div className="container-brand max-w-6xl mx-auto px-4 md:px-6 flex items-center justify-between">
-        <a href="#top" className="flex items-center gap-3">
+      <div
+        className={`mx-auto max-w-5xl flex items-center justify-between gap-3 px-4 md:px-5 py-2.5 md:py-3 rounded-full border transition-all duration-300 ${
+          scrolled
+            ? "bg-background/85 backdrop-blur-xl border-ivory/15 shadow-elegant"
+            : "bg-background/55 backdrop-blur-md border-ivory/10"
+        }`}
+      >
+        <a href="#top" className="flex items-center gap-2.5 shrink-0">
           <img
             src={logoMark}
             alt="Markaz Rabithah"
-            className="w-8 h-8 md:w-9 md:h-9 object-contain"
+            className="w-7 h-7 md:w-8 md:h-8 object-contain"
           />
-          <span className="font-display font-extrabold text-sm md:text-base tracking-tight text-ivory">
+          <span className="font-display font-extrabold text-[0.8rem] md:text-sm tracking-tight text-ivory">
             Markaz <span className="text-primary">Rabithah</span>
           </span>
         </a>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-7">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="text-xs uppercase tracking-[0.2em] text-ivory/70 hover:text-primary transition-colors"
+              className="text-[0.7rem] uppercase tracking-[0.2em] text-ivory/70 hover:text-primary transition-colors"
             >
               {l.label}
             </a>
           ))}
           <a
             href="#kontak"
-            className="text-xs uppercase tracking-[0.2em] px-4 py-2 bg-primary text-ivory hover:bg-primary/90 rounded-sm transition-colors font-semibold"
+            className="text-[0.7rem] uppercase tracking-[0.2em] px-4 py-2 bg-primary text-ivory hover:bg-primary/90 rounded-full transition-colors font-semibold"
           >
             Daftar
           </a>
@@ -92,7 +96,7 @@ const Nav = () => {
         <button
           aria-label="Menu"
           onClick={() => setOpen(!open)}
-          className="md:hidden text-ivory p-2"
+          className="md:hidden text-ivory p-1.5"
         >
           <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2">
             {open ? (
@@ -105,8 +109,8 @@ const Nav = () => {
       </div>
 
       {open && (
-        <div className="md:hidden border-t border-ivory/10 bg-background/95 backdrop-blur-md">
-          <div className="px-6 py-5 flex flex-col gap-4">
+        <div className="md:hidden mt-2 mx-auto max-w-5xl bg-background/95 backdrop-blur-xl border border-ivory/15 rounded-2xl shadow-elegant overflow-hidden">
+          <div className="px-5 py-4 flex flex-col gap-3">
             {links.map((l) => (
               <a
                 key={l.href}
@@ -120,7 +124,7 @@ const Nav = () => {
             <a
               href="#kontak"
               onClick={() => setOpen(false)}
-              className="mt-2 text-sm text-center uppercase tracking-[0.2em] px-4 py-3 bg-primary text-ivory rounded-sm font-semibold"
+              className="mt-1 text-sm text-center uppercase tracking-[0.2em] px-4 py-3 bg-primary text-ivory rounded-full font-semibold"
             >
               Daftar
             </a>
@@ -673,20 +677,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* FOOTER ============================================================ */}
-      <footer className="border-t border-ivory/10 py-5 md:py-8 px-4 md:px-6">
-        <div className="container-brand max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4 text-[0.6rem] md:text-xs text-ivory/50">
-          <div className="flex items-center gap-3">
-            <img src={logoMark} alt="" className="w-4 h-4 md:w-5 md:h-5 object-contain" />
-            <span>© 2026 Markaz Rabithah · Designed by SYMP Studio</span>
-          </div>
-          <div className="flex gap-4 md:gap-5">
-            <a href="#filosofi" className="hover:text-primary">Filosofi</a>
-            <a href="#pilar" className="hover:text-primary">Pilar Misi</a>
-            <a href="#kontak" className="hover:text-primary">Kontak</a>
-          </div>
-        </div>
-      </footer>
     </main>
   );
 };
