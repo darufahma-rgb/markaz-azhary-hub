@@ -546,12 +546,9 @@ const Index = () => {
             Bahasa visual <span className="text-primary">yang jujur.</span>
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-3 md:gap-10 mb-8 md:mb-12">
-            <div className="reveal aspect-[4/3] bg-navy-light/40 border border-ivory/10 flex items-center justify-center p-6 md:p-10">
-              <img src={logo} alt="Logo on dark" className="max-w-[80%] h-auto" />
-            </div>
-            <div className="reveal aspect-[4/3] bg-ivory flex items-center justify-center p-6 md:p-10">
-              <img src={logo} alt="Logo on light" className="max-w-[80%] h-auto" />
+          <div className="mb-8 md:mb-12">
+            <div className="reveal aspect-[16/9] bg-navy-light/40 border border-ivory/10 flex items-center justify-center p-8 md:p-16">
+              <img src={logo} alt="Logo on dark" className="max-w-[60%] md:max-w-[40%] h-auto" />
             </div>
           </div>
 
@@ -560,11 +557,10 @@ const Index = () => {
             <div className="text-[0.6rem] md:text-xs uppercase tracking-[0.3em] text-ivory/60 mb-3 md:mb-5">
               Palet Warna
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
+            <div className="grid grid-cols-3 gap-2 md:gap-4">
               {[
                 { name: "Deep Navy", hex: "#0A1D37", c: "#0A1D37", text: "text-ivory" },
                 { name: "Crimson Tarbush", hex: "#B22222", c: "#B22222", text: "text-ivory" },
-                { name: "Gold", hex: "#D4B87A", c: "#D4B87A", text: "text-navy-deep" },
                 { name: "Ivory", hex: "#F4EEE4", c: "#F4EEE4", text: "text-navy-deep" },
               ].map((c) => (
                 <div
@@ -591,8 +587,8 @@ const Index = () => {
             </div>
             <div className="grid md:grid-cols-2 gap-5 md:gap-12 items-start">
               <div>
-                <div className="font-display font-extrabold text-4xl md:text-7xl text-primary leading-none">
-                  Inter
+                <div className="font-display font-extrabold text-3xl md:text-6xl text-primary leading-none">
+                  Sk Modernist
                 </div>
                 <div className="mt-2 md:mt-3 text-[0.7rem] md:text-sm text-ivory/60">
                   Display & Body — geometris, ringkas, modern.
@@ -622,45 +618,56 @@ const Index = () => {
           <div className="reveal text-primary mb-4 md:mb-6 flex justify-center">
             <PlusMark className="w-5 h-5 md:w-7 md:h-7" />
           </div>
+          <div className="reveal text-[0.6rem] md:text-xs uppercase tracking-[0.3em] text-ivory/50 mb-3 md:mb-5">
+            Brand Identity by
+          </div>
           <h2 className="reveal font-display font-extrabold text-2xl md:text-6xl leading-[1.05] text-ivory mb-4 md:mb-6">
-            Mulai perjalanan ilmumu <br />
-            <span className="text-primary">bersama kami.</span>
+            Butuh identitas visual <br />
+            <span className="text-primary">untuk brand-mu?</span>
           </h2>
           <p className="reveal text-xs md:text-base text-ivory/65 max-w-xl mx-auto mb-6 md:mb-10 leading-relaxed">
-            Pendaftaran santri Markaz Rabithah dibuka setiap angkatan.
-            Hubungi kami untuk konsultasi program, jadwal, dan persiapan
-            dokumen.
+            Brand guideline ini dirancang oleh <span className="text-ivory font-semibold">SYMP Studio</span> —
+            studio desain yang membantu lembaga, sekolah, dan brand membangun
+            identitas visual yang jujur dan tahan lama.
           </p>
           <div className="reveal flex flex-wrap items-center justify-center gap-3 md:gap-4">
             <a
-              href="https://wa.me/6280000000000"
+              href="https://wa.me/6281311506025"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 md:px-7 py-2.5 md:py-3.5 bg-primary hover:bg-primary/90 text-ivory text-[0.65rem] md:text-sm uppercase tracking-[0.2em] md:tracking-[0.25em] font-semibold rounded-sm transition-colors"
             >
-              Hubungi via WhatsApp
+              Hubungi SYMP Studio
             </a>
             <a
-              href="mailto:info@markazrabithah.id"
+              href="https://wa.me/6281311506025"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 md:px-7 py-2.5 md:py-3.5 border border-ivory/20 hover:border-primary hover:text-primary text-ivory/85 text-[0.65rem] md:text-sm uppercase tracking-[0.2em] md:tracking-[0.25em] font-semibold rounded-sm transition-colors"
             >
-              info@markazrabithah.id
+              +62 813-1150-6025
             </a>
           </div>
 
           <div className="reveal mt-10 md:mt-16 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-10 text-left max-w-3xl mx-auto pt-6 md:pt-10 border-t border-ivory/10">
             <div>
-              <div className="text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.3em] text-ivory/50 mb-1.5 md:mb-2">Lokasi</div>
-              <div className="text-xs md:text-sm text-ivory/85 font-medium">Indonesia</div>
+              <div className="text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.3em] text-ivory/50 mb-1.5 md:mb-2">Studio</div>
+              <div className="text-xs md:text-sm text-ivory/85 font-medium">SYMP Studio</div>
             </div>
             <div>
-              <div className="text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.3em] text-ivory/50 mb-1.5 md:mb-2">Pendaftaran</div>
-              <div className="text-xs md:text-sm text-ivory/85 font-medium">Setiap angkatan</div>
+              <div className="text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.3em] text-ivory/50 mb-1.5 md:mb-2">Layanan</div>
+              <div className="text-xs md:text-sm text-ivory/85 font-medium">Brand Identity & Visual Design</div>
             </div>
             <div className="col-span-2 md:col-span-1">
-              <div className="text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.3em] text-ivory/50 mb-1.5 md:mb-2">Sosial</div>
-              <div className="flex gap-4 text-xs md:text-sm text-ivory/85 font-medium">
-                <a href="#" className="hover:text-primary">Instagram</a>
-                <a href="#" className="hover:text-primary">YouTube</a>
-              </div>
+              <div className="text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.3em] text-ivory/50 mb-1.5 md:mb-2">WhatsApp</div>
+              <a
+                href="https://wa.me/6281311506025"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs md:text-sm text-ivory/85 font-medium hover:text-primary"
+              >
+                +62 813-1150-6025
+              </a>
             </div>
           </div>
         </div>
@@ -671,7 +678,7 @@ const Index = () => {
         <div className="container-brand max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4 text-[0.6rem] md:text-xs text-ivory/50">
           <div className="flex items-center gap-3">
             <img src={logoMark} alt="" className="w-4 h-4 md:w-5 md:h-5 object-contain" />
-            <span>© 2026 Markaz Rabithah · Mahad Persiapan Al-Azhar</span>
+            <span>© 2026 Markaz Rabithah · Designed by SYMP Studio</span>
           </div>
           <div className="flex gap-4 md:gap-5">
             <a href="#filosofi" className="hover:text-primary">Filosofi</a>
