@@ -1,0 +1,17 @@
+.local/
+.cache/
+.migration-backup/
+.agents/
+attached_assets/
+screenshots/
+artifacts/api-server/
+artifacts/mockup-sandbox/
+lib/
+scripts/
+*.py
+*.pyc
+pyproject.toml
+uv.lock
+replit.md
+.replit
+.replitignore
