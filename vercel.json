@@ -3,7 +3,7 @@
   "framework": null,
   "installCommand": "pnpm install --frozen-lockfile",
   "buildCommand": "pnpm --filter @workspace/markaz-rabithah... run build",
-  "outputDirectory": "artifacts/markaz-rabithah/dist",
+  "outputDirectory": "dist",
   "rewrites": [
     { "source": "/((?!assets/|fonts/|logos/|favicon|apple-touch-icon|opengraph|robots).*)", "destination": "/index.html" }
   ],
