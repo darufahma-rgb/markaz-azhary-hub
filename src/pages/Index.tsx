@@ -67,17 +67,17 @@ const Index = () => {
   return (
     <main className="relative overflow-x-hidden bg-background text-foreground">
       {/* Corner asterisk + plus (signature frame) */}
-      <div className="fixed top-6 left-6 z-40 text-primary">
-        <Asterisk className="w-6 h-6" />
+      <div className="fixed top-3 left-3 md:top-6 md:left-6 z-40 text-primary">
+        <Asterisk className="w-4 h-4 md:w-6 md:h-6" />
       </div>
-      <div className="fixed top-6 right-6 z-40 text-primary">
-        <PlusMark className="w-6 h-6" />
+      <div className="fixed top-3 right-3 md:top-6 md:right-6 z-40 text-primary">
+        <PlusMark className="w-4 h-4 md:w-6 md:h-6" />
       </div>
-      <div className="fixed bottom-6 left-6 z-40 text-primary hidden md:block">
-        <PlusMark className="w-5 h-5" />
+      <div className="fixed bottom-3 left-3 md:bottom-6 md:left-6 z-40 text-primary">
+        <PlusMark className="w-4 h-4 md:w-5 md:h-5" />
       </div>
-      <div className="fixed bottom-6 right-6 z-40 text-primary hidden md:block">
-        <PlusMark className="w-5 h-5" />
+      <div className="fixed bottom-3 right-3 md:bottom-6 md:right-6 z-40 text-primary">
+        <PlusMark className="w-4 h-4 md:w-5 md:h-5" />
       </div>
 
       {/* Side labels */}
