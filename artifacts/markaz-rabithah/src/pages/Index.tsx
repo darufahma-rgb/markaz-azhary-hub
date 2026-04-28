@@ -352,10 +352,15 @@ const Nav = () => {
             </a>
           ))}
           <a
-            href="#kontak"
-            className="shine text-[0.7rem] uppercase tracking-[0.2em] px-4 py-2 bg-primary text-ivory hover:bg-primary/90 rounded-full transition-colors font-semibold"
+            href="#download"
+            className="shine inline-flex items-center gap-1.5 text-[0.7rem] uppercase tracking-[0.2em] px-4 py-2 bg-primary text-ivory hover:bg-primary/90 rounded-full transition-colors font-semibold"
           >
-            Daftar
+            <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M7 10l5 5 5-5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M12 15V3" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            Download Aset
           </a>
         </nav>
 
@@ -415,16 +420,21 @@ const Nav = () => {
               </a>
             ))}
             <a
-              href="#kontak"
+              href="#download"
               onClick={() => setOpen(false)}
-              className={`mt-1 text-sm text-center uppercase tracking-[0.2em] px-4 py-3 bg-primary text-ivory rounded-full font-semibold transition-all duration-500 ease-out ${
+              className={`mt-1 inline-flex items-center justify-center gap-2 text-sm text-center uppercase tracking-[0.2em] px-4 py-3 bg-primary text-ivory rounded-full font-semibold transition-all duration-500 ease-out ${
                 open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
               }`}
               style={{
                 transitionDelay: open ? `${80 + links.length * 55}ms` : "0ms",
               }}
             >
-              Daftar
+              <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M7 10l5 5 5-5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M12 15V3" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Download Aset
             </a>
           </div>
         </div>
@@ -965,7 +975,7 @@ const Index = () => {
           </h2>
 
           {/* Download Assets CTA */}
-          <div className="reveal mb-8 md:mb-14">
+          <div id="download" className="reveal mb-8 md:mb-14 scroll-mt-28">
             <a
               href="https://drive.google.com/drive/folders/1V5eahQZpSaXwpekZ7RcK6ZRRNwHjVw1V?usp=sharing"
               target="_blank"
