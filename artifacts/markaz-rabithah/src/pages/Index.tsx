@@ -559,7 +559,7 @@ const Index = () => {
           <img
             src={heroPortrait}
             alt=""
-            className="h-[88%] md:h-[95%] w-auto object-contain object-bottom opacity-70 md:opacity-75 select-none animate-float-slow"
+            className="h-[88%] md:h-[95%] w-auto object-contain object-bottom opacity-10 md:opacity-[0.12] select-none animate-float-slow"
             style={{
               filter:
                 "drop-shadow(0 30px 60px rgba(0,0,0,0.55)) drop-shadow(0 0 80px rgba(178,34,34,0.18))",
