@@ -259,51 +259,118 @@ const Index = () => {
         </div>
       </section>
 
-      {/* LOGO GRID ========================================================= */}
+      {/* LOGO GRID CONSTRUCTION =========================================== */}
       <section className="relative md:min-h-screen flex items-center pt-12 pb-14 md:pt-32 md:pb-28 px-4 md:px-6">
         <div className="container-brand max-w-6xl mx-auto relative w-full">
-          <Eyebrow num="00">Logo Showcase</Eyebrow>
+          <Eyebrow num="00">Logo Grid System</Eyebrow>
           <h2 className="reveal font-display font-extrabold text-2xl md:text-6xl leading-[1.05] text-ivory max-w-3xl mb-6 md:mb-12">
-            Satu logo,{" "}
-            <span className="text-primary">enam ekspresi.</span>
+            Konstruksi logo,{" "}
+            <span className="text-primary">terukur presisi.</span>
           </h2>
 
-          <div className="reveal grid grid-cols-2 md:grid-cols-3 gap-px bg-ivory/10 border border-ivory/10">
-            {[
-              { src: logoMark, bg: "hsl(var(--navy-deep))", label: "Mark · Navy", sub: "Primary", textOnLight: false, w: "w-1/2" },
-              { src: logoMark, bg: "#B22222", label: "Mark · Crimson", sub: "Accent", textOnLight: false, w: "w-1/2" },
-              { src: logoMark, bg: "#F4EEE4", label: "Mark · Ivory", sub: "Light", textOnLight: true, w: "w-1/2" },
-              { src: logo, bg: "hsl(var(--navy-deep))", label: "Full · Navy", sub: "Primary", textOnLight: false, w: "w-3/4" },
-              { src: logo, bg: "#B22222", label: "Full · Crimson", sub: "Accent", textOnLight: false, w: "w-3/4" },
-              { src: logo, bg: "#F4EEE4", label: "Full · Ivory", sub: "Light", textOnLight: true, w: "w-3/4" },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="reveal relative aspect-square flex items-center justify-center overflow-hidden group"
-                style={{ backgroundColor: item.bg, transitionDelay: `${i * 60}ms` }}
-              >
-                <img
-                  src={item.src}
-                  alt={item.label}
-                  className={`${item.w} h-auto object-contain transition-transform duration-500 group-hover:scale-105`}
+          {/* Construction canvas */}
+          <div className="reveal relative w-full max-w-3xl mx-auto aspect-square bg-background border border-ivory/10 overflow-hidden">
+            {/* Vertical grid lines */}
+            <div aria-hidden className="absolute inset-0 pointer-events-none">
+              {Array.from({ length: 9 }).map((_, i) => (
+                <div
+                  key={`v-${i}`}
+                  className="absolute top-0 bottom-0 w-px bg-ivory/15"
+                  style={{ left: `${((i + 1) * 100) / 10}%` }}
                 />
-                <div className="absolute top-2 left-2 md:top-3 md:left-3 text-[0.55rem] md:text-[0.65rem] font-bold opacity-60" style={{ color: item.textOnLight ? "hsl(var(--navy-deep))" : "rgb(244 238 228)" }}>
-                  0{i + 1}
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-2 md:p-3 flex items-end justify-between" style={{ color: item.textOnLight ? "hsl(var(--navy-deep))" : "rgb(244 238 228)" }}>
-                  <div>
-                    <div className="font-display font-bold text-[0.65rem] md:text-xs leading-tight">{item.label}</div>
-                    <div className="text-[0.5rem] md:text-[0.6rem] uppercase tracking-[0.2em] opacity-60 mt-0.5">{item.sub}</div>
-                  </div>
-                  <PlusMark className="w-3 h-3 md:w-3.5 md:h-3.5 opacity-40 group-hover:opacity-100 group-hover:rotate-90 transition-all duration-500" />
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
+            {/* Horizontal grid lines */}
+            <div aria-hidden className="absolute inset-0 pointer-events-none">
+              {Array.from({ length: 9 }).map((_, i) => (
+                <div
+                  key={`h-${i}`}
+                  className="absolute left-0 right-0 h-px bg-ivory/15"
+                  style={{ top: `${((i + 1) * 100) / 10}%` }}
+                />
+              ))}
+            </div>
+            {/* Diagonal guide lines */}
+            <div aria-hidden className="absolute inset-0 pointer-events-none">
+              <svg
+                viewBox="0 0 100 100"
+                preserveAspectRatio="none"
+                className="absolute inset-0 w-full h-full"
+              >
+                <line x1="0" y1="0" x2="100" y2="100" stroke="rgba(244,238,228,0.12)" strokeWidth="0.15" />
+                <line x1="100" y1="0" x2="0" y2="100" stroke="rgba(244,238,228,0.12)" strokeWidth="0.15" />
+                <line x1="50" y1="0" x2="50" y2="100" stroke="rgba(178,34,34,0.35)" strokeWidth="0.2" strokeDasharray="0.6,0.6" />
+                <line x1="0" y1="50" x2="100" y2="50" stroke="rgba(178,34,34,0.35)" strokeWidth="0.2" strokeDasharray="0.6,0.6" />
+              </svg>
+            </div>
+            {/* Safe area circle */}
+            <div aria-hidden className="absolute inset-[10%] rounded-full border border-ivory/10 pointer-events-none" />
+            <div aria-hidden className="absolute inset-[20%] rounded-full border border-ivory/10 pointer-events-none" />
+
+            {/* Logo at center */}
+            <div className="absolute inset-[20%] flex items-center justify-center">
+              <img
+                src={logoMark}
+                alt="Markaz Rabithah"
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            {/* Anchor points on logo bounding box */}
+            <div aria-hidden className="absolute inset-[20%] pointer-events-none">
+              {[
+                { top: "0%", left: "0%" },
+                { top: "0%", left: "50%" },
+                { top: "0%", left: "100%" },
+                { top: "50%", left: "0%" },
+                { top: "50%", left: "100%" },
+                { top: "100%", left: "0%" },
+                { top: "100%", left: "50%" },
+                { top: "100%", left: "100%" },
+              ].map((p, i) => (
+                <div
+                  key={i}
+                  className="absolute w-1.5 h-1.5 md:w-2 md:h-2 bg-primary border border-ivory"
+                  style={{ top: p.top, left: p.left, transform: "translate(-50%,-50%)" }}
+                />
+              ))}
+            </div>
+
+            {/* Corner markers */}
+            <div aria-hidden className="absolute top-2 left-2 md:top-3 md:left-3 text-primary">
+              <PlusMark className="w-3 h-3 md:w-4 md:h-4" />
+            </div>
+            <div aria-hidden className="absolute top-2 right-2 md:top-3 md:right-3 text-primary">
+              <PlusMark className="w-3 h-3 md:w-4 md:h-4" />
+            </div>
+            <div aria-hidden className="absolute bottom-2 left-2 md:bottom-3 md:left-3 text-primary">
+              <PlusMark className="w-3 h-3 md:w-4 md:h-4" />
+            </div>
+            <div aria-hidden className="absolute bottom-2 right-2 md:bottom-3 md:right-3 text-primary">
+              <PlusMark className="w-3 h-3 md:w-4 md:h-4" />
+            </div>
+
+            {/* Measurement labels */}
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 text-[0.5rem] md:text-[0.6rem] uppercase tracking-[0.3em] text-ivory/50 font-medium">
+              10 × 10 grid
+            </div>
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-[0.5rem] md:text-[0.6rem] uppercase tracking-[0.3em] text-primary/80 font-medium">
+              Markaz Rabithah
+            </div>
           </div>
 
-          <div className="reveal mt-5 md:mt-8 grid grid-cols-3 gap-2 md:gap-5 max-w-md md:max-w-lg">
+          {/* Caption */}
+          <div className="reveal mt-5 md:mt-8 max-w-2xl mx-auto text-center">
+            <p className="text-[0.7rem] md:text-sm text-ivory/60 leading-relaxed">
+              Logo dibangun di atas grid <span className="text-ivory">10 × 10</span> dengan
+              area aman <span className="text-ivory">20%</span> di setiap sisi —
+              menjaga proporsi tetap konsisten di setiap aplikasi.
+            </p>
+          </div>
+
+          <div className="reveal mt-6 md:mt-10 grid grid-cols-3 gap-2 md:gap-5 max-w-md md:max-w-lg mx-auto">
             {stats.map((s) => (
-              <div key={s.l}>
+              <div key={s.l} className="text-center">
                 <div className="font-display font-bold text-base md:text-2xl text-primary">
                   {s.v}
                 </div>
