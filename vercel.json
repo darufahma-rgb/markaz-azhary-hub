@@ -1,8 +1,8 @@
 {
   "version": 2,
   "public": true,
-  "installCommand": "pnpm install",
-  "buildCommand": "npm run build",
+  "installCommand": "cd artifacts/markaz-rabithah && pnpm install --ignore-workspace --no-frozen-lockfile",
+  "buildCommand": "cd artifacts/markaz-rabithah && pnpm run build",
   "outputDirectory": "dist",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
