@@ -2,81 +2,44 @@ import { useEffect, useRef } from "react";
 import logo from "@/assets/logo-markaz-rabithah.png";
 import { useReveal } from "@/hooks/use-reveal";
 
-// ---- Icon primitives (minimalist, stroke-based) -----------------------------
-const IconBase = ({ children }: { children: React.ReactNode }) => (
-  <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="square" strokeLinejoin="miter" className="h-10 w-10">
-    {children}
+// ---- Asterisk mark (signature element, like reference) ---------------------
+const Asterisk = ({ className = "" }: { className?: string }) => (
+  <svg viewBox="0 0 100 100" className={className} fill="currentColor" aria-hidden="true">
+    <g>
+      {[0, 45, 90, 135].map((r) => (
+        <rect key={r} x="44" y="8" width="12" height="84" rx="3" transform={`rotate(${r} 50 50)`} />
+      ))}
+      <circle cx="50" cy="50" r="10" />
+    </g>
   </svg>
 );
 
-const IconManhaj = () => (
-  <IconBase>
-    <rect x="8" y="10" width="32" height="28" />
-    <path d="M8 18h32M16 10v28M24 18v20" />
-  </IconBase>
-);
-const IconIlmuAlat = () => (
-  <IconBase>
-    <path d="M24 6L6 16v16l18 10 18-10V16L24 6z" />
-    <path d="M24 6v36M6 16l36 16M42 16L6 32" />
-  </IconBase>
-);
-const IconQuran = () => (
-  <IconBase>
-    <path d="M10 10h20a8 8 0 0 1 8 8v24H18a8 8 0 0 1-8-8V10z" />
-    <path d="M10 34a8 8 0 0 1 8-8h20" />
-    <path d="M24 18v10" />
-  </IconBase>
-);
-const IconAkhlak = () => (
-  <IconBase>
-    <circle cx="24" cy="24" r="16" />
-    <path d="M14 24c4 6 16 6 20 0M18 20h0M30 20h0" />
-  </IconBase>
-);
-
-// ---- Tarbush (fez) geometric icon ------------------------------------------
-const TarbushMark = ({ className = "" }: { className?: string }) => (
-  <svg viewBox="0 0 200 200" className={className} fill="none" stroke="currentColor" strokeWidth="2">
-    <rect x="60" y="50" width="80" height="110" />
-    <rect x="54" y="155" width="92" height="12" />
-    <path d="M100 50v-16M100 34a8 8 0 0 1 0-16" />
-    <path d="M70 70h60M70 90h60M70 110h60M70 130h60" strokeOpacity="0.35" />
+// ---- Plus mark (corner markers, like reference) -----------------------------
+const PlusMark = ({ className = "" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+    <path d="M12 4v16M4 12h16" />
   </svg>
 );
 
-// ---- Section wrapper --------------------------------------------------------
-const Section = ({
-  id,
-  eyebrow,
-  title,
-  lead,
-  children,
-  className = "",
-}: {
-  id?: string;
-  eyebrow?: string;
-  title?: string;
-  lead?: string;
-  children: React.ReactNode;
-  className?: string;
-}) => (
-  <section id={id} className={`py-28 md:py-40 ${className}`}>
-    <div className="container-brand">
-      {eyebrow && <div className="reveal eyebrow mb-8">{eyebrow}</div>}
-      {title && (
-        <h2 className="reveal heading-serif text-4xl md:text-6xl text-ivory mb-6 max-w-3xl leading-[1.05]">
-          {title}
-        </h2>
-      )}
-      {lead && (
-        <p className="reveal text-muted-foreground max-w-2xl text-base md:text-lg leading-relaxed mb-16">
-          {lead}
-        </p>
-      )}
-      {children}
+// ---- Numbered eyebrow: (01)  Label ------------------------------------------
+const Eyebrow = ({ num, children }: { num: string; children: React.ReactNode }) => (
+  <div className="reveal flex items-center gap-3 mb-8 text-sm md:text-base font-semibold">
+    <span className="text-primary">({num})</span>
+    <span className="text-ivory">{children}</span>
+  </div>
+);
+
+// ---- Side vertical label (like W. / Honors in reference) --------------------
+const SideLabel = ({ top, letter, word }: { top: string; letter: string; word: string }) => (
+  <div
+    className="hidden lg:flex fixed right-0 z-40 flex-col items-center bg-ivory text-navy-deep select-none"
+    style={{ top }}
+  >
+    <div className="px-3 py-2 text-lg font-black border-b border-navy-deep/20">{letter}</div>
+    <div className="px-3 py-4 text-xs font-semibold tracking-wider" style={{ writingMode: "vertical-rl" }}>
+      {word}
     </div>
-  </section>
+  </div>
 );
 
 // ---- Main page --------------------------------------------------------------
@@ -88,7 +51,6 @@ const Index = () => {
     const onScroll = () => {
       if (!heroRef.current) return;
       const y = window.scrollY;
-      heroRef.current.style.transform = `translateY(${y * 0.15}px)`;
       heroRef.current.style.opacity = `${Math.max(0, 1 - y / 700)}`;
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -96,377 +58,313 @@ const Index = () => {
   }, []);
 
   const missions = [
-    { icon: <IconManhaj />, title: "Manhaj Azhary", desc: "Mewarisi metodologi keilmuan Al-Azhar yang moderat, berimbang, dan bersanad." },
-    { icon: <IconIlmuAlat />, title: "Ilmu Alat", desc: "Membangun fondasi Nahwu, Sharaf, dan Balaghah sebagai kunci memahami turats." },
-    { icon: <IconQuran />, title: "Al-Qur'an", desc: "Menghafal, mentadabburi, dan menjaga hubungan santri dengan Kalamullah." },
-    { icon: <IconAkhlak />, title: "Akhlak", desc: "Membentuk adab luhur — cermin santri ideal yang tawadhu' dan berintegritas." },
+    { t: "Manhaj Azhary", d: "Mewarisi metodologi keilmuan Al-Azhar yang moderat, berimbang, dan bersanad." },
+    { t: "Ilmu Alat", d: "Membangun fondasi Nahwu, Sharaf, dan Balaghah sebagai kunci memahami turats." },
+    { t: "Al-Qur'an", d: "Menghafal, mentadabburi, dan menjaga hubungan santri dengan Kalamullah." },
+    { t: "Akhlak", d: "Membentuk adab luhur — cermin santri ideal yang tawadhu' dan berintegritas." },
   ];
 
   return (
     <main className="relative overflow-x-hidden bg-background text-foreground">
-      {/* Top nav */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-background/60 border-b border-border/40">
-        <div className="container-brand flex items-center justify-between h-16">
-          <span className="heading-display text-[0.7rem] tracking-[0.4em] text-ivory">MARKAZ · RABITHAH</span>
-          <nav className="hidden md:flex gap-10 text-xs uppercase tracking-[0.25em] text-muted-foreground">
-            <a href="#filosofi" className="hover:text-primary transition-colors">Filosofi</a>
-            <a href="#misi" className="hover:text-primary transition-colors">Misi</a>
-            <a href="#warna" className="hover:text-primary transition-colors">Warna</a>
-            <a href="#tipografi" className="hover:text-primary transition-colors">Tipografi</a>
-          </nav>
-          <span className="text-[0.65rem] tracking-[0.3em] text-muted-foreground hidden md:block">BRAND · GUIDELINE · 01</span>
-        </div>
-      </header>
+      {/* Corner asterisk + plus (signature frame) */}
+      <div className="fixed top-6 left-6 z-40 text-primary">
+        <Asterisk className="w-6 h-6" />
+      </div>
+      <div className="fixed top-6 right-6 z-40 text-primary">
+        <PlusMark className="w-6 h-6" />
+      </div>
+      <div className="fixed bottom-6 left-6 z-40 text-primary hidden md:block">
+        <PlusMark className="w-5 h-5" />
+      </div>
+      <div className="fixed bottom-6 right-6 z-40 text-primary hidden md:block">
+        <PlusMark className="w-5 h-5" />
+      </div>
 
-      {/* HERO */}
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-hero">
-        <div className="absolute inset-0 grid-lines opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
+      {/* Side labels */}
+      <SideLabel top="18%" letter="M." word="Manhaj" />
+      <SideLabel top="48%" letter="R." word="Rabithah" />
+      <SideLabel top="78%" letter="A." word="Azhary" />
 
-        {/* ambient crimson glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-crimson/10 blur-[120px] animate-slow-pulse" />
-
-        <div ref={heroRef} className="relative z-10 flex flex-col items-center text-center px-6">
-          <div className="reveal is-visible mb-12 relative">
-            <div className="absolute inset-0 bg-crimson/20 blur-3xl rounded-full" />
+      {/* HERO ================================================================ */}
+      <section className="relative min-h-screen flex flex-col items-center justify-center px-6">
+        <div ref={heroRef} className="relative z-10 flex flex-col items-center">
+          <div className="flex items-center gap-6 md:gap-10">
             <img
               src={logo}
-              alt="Logo Markaz Rabithah — kaligrafi kufi Rabithah membentuk Tarbush Azhar"
-              className="relative w-72 md:w-96 h-auto drop-shadow-[0_20px_40px_rgba(178,34,34,0.3)]"
+              alt="Markaz Rabithah logo"
+              className="w-20 md:w-28 h-auto"
             />
-          </div>
-
-          <div className="reveal is-visible" style={{ animationDelay: "0.3s" }}>
-            <div className="flex items-center justify-center gap-4 mb-6">
-              <span className="h-px w-12 bg-primary" />
-              <span className="text-[0.65rem] uppercase tracking-[0.4em] text-primary">Identitas Visual · 2026</span>
-              <span className="h-px w-12 bg-primary" />
-            </div>
-
-            <h1 className="heading-display text-4xl md:text-7xl text-ivory mb-8">
-              MARKAZ RABITHAH
+            <h1 className="heading-huge text-ivory text-5xl md:text-7xl">
+              markaz<br />rabithah<sup className="text-primary text-2xl md:text-3xl align-top ml-1">®</sup>
             </h1>
-
-            <p className="heading-serif italic text-lg md:text-2xl text-muted-foreground max-w-xl mx-auto leading-relaxed">
-              Kokoh ilmunya, terjaga hafalannya,<br />luhur akhlaknya.
-            </p>
-
-            <div className="mt-20 flex flex-col items-center gap-3 text-muted-foreground">
-              <span className="text-[0.6rem] uppercase tracking-[0.4em]">Gulir untuk menelusuri</span>
-              <div className="w-px h-16 bg-gradient-to-b from-primary to-transparent" />
-            </div>
           </div>
+        </div>
+
+        {/* scroll chevron */}
+        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 text-primary animate-slow-pulse">
+          <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
         </div>
       </section>
 
-      {/* INTRO STATEMENT */}
-      <section className="py-32 md:py-48 border-t border-border/40">
-        <div className="container-brand max-w-4xl">
-          <p className="reveal eyebrow mb-10">Prolog</p>
-          <p className="reveal heading-serif text-2xl md:text-4xl text-ivory leading-[1.35]">
-            Sebuah <em className="text-primary not-italic">mediator</em> yang menjembatani santri Indonesia menuju gerbang Al-Azhar asy-Syarif — tempat tradisi keilmuan Islam dijaga dengan sanad yang tak terputus selama seribu tahun lebih.
+      {/* WELCOME / INTRO ====================================================== */}
+      <section className="py-24 md:py-40 px-6">
+        <div className="container-brand max-w-5xl text-center">
+          <Eyebrow num="2">Tentang kami</Eyebrow>
+
+          <h2 className="reveal heading-huge text-ivory text-6xl md:text-8xl mb-12">
+            Selamat datang<br />di Markaz kami!
+          </h2>
+
+          <p className="reveal heading-serif text-xl md:text-2xl text-ivory/90 max-w-2xl mx-auto leading-snug">
+            Kami membimbing santri menggapai<br />gerbang Al-Azhar asy-Syarif.
           </p>
-          <div className="reveal mt-16 flex items-center gap-6">
-            <div className="h-px flex-1 bg-gradient-line" />
-            <span className="heading-display text-xs tracking-[0.4em] text-primary">٠١</span>
-            <div className="h-px flex-1 bg-gradient-line" />
+        </div>
+
+        {/* Two-column prose with inset image */}
+        <div className="container-brand mt-32 grid md:grid-cols-2 gap-12 md:gap-20 relative">
+          {/* Visual block */}
+          <div className="reveal relative">
+            <div className="aspect-[4/5] bg-navy-light relative overflow-hidden">
+              <div className="absolute inset-0 grid-lines opacity-30" />
+              <div className="absolute inset-0 flex items-center justify-center text-primary/40">
+                <Asterisk className="w-40 h-40" />
+              </div>
+              <div className="absolute bottom-6 left-6 text-primary">
+                <Asterisk className="w-10 h-10" />
+              </div>
+            </div>
+            <p className="reveal absolute -bottom-8 left-6 right-0 heading-serif text-lg md:text-xl text-ivory max-w-xs leading-snug bg-background p-4">
+              Kami percaya identitas harus <em className="text-primary not-italic">abadi</em> dan <em className="text-primary not-italic">bermakna</em>.
+            </p>
+          </div>
+
+          {/* Text block */}
+          <div className="reveal grid grid-cols-2 gap-6 text-sm text-muted-foreground leading-relaxed self-start">
+            <p>
+              Sebagai mediator Mahad persiapan Al-Azhar, kami memadukan tradisi keilmuan klasik dengan pendekatan modern yang accessible bagi santri Indonesia.
+            </p>
+            <p>
+              Kami berkolaborasi erat dengan para masyayikh, ulama sanad, serta lembaga formal untuk menjaga kemurnian manhaj.
+            </p>
+            <p>
+              Markaz Rabithah lahir dari kebutuhan akan jembatan yang kokoh — antara semangat santri muda dan warisan keilmuan yang berusia lebih dari seribu tahun.
+            </p>
+            <p>
+              Setiap santri unik, dan setiap perjalanan ilmu menuntut strategi yang berbeda; karenanya kurikulum kami dirancang adaptif namun tetap bersanad.
+            </p>
+          </div>
+        </div>
+
+        {/* CTA line */}
+        <div className="container-brand mt-32 reveal text-right">
+          <div className="inline-flex items-start gap-3">
+            <span className="text-primary font-semibold">(2a)</span>
+            <span className="heading-serif text-xl md:text-3xl text-ivory max-w-md leading-tight">
+              Itulah mengapa kami menawarkan empat pilar tarbiyah.{" "}
+              <a href="#pilar" className="underline decoration-primary underline-offset-4 hover:text-primary transition-colors">
+                Pelajari
+              </a>
+            </span>
+            <PlusMark className="w-5 h-5 text-primary mt-2" />
           </div>
         </div>
       </section>
 
-      {/* FILOSOFI */}
-      <Section
-        id="filosofi"
-        eyebrow="Bab 01 · Filosofi Nama"
-        title="Dua kata, satu arah gerak."
-      >
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-          {/* Left — meaning */}
-          <div className="space-y-14">
+      {/* FILOSOFI ============================================================ */}
+      <section id="filosofi" className="py-24 md:py-40 px-6 border-t border-border/30">
+        <div className="container-brand">
+          <Eyebrow num="03">Filosofi nama</Eyebrow>
+          <h2 className="reveal heading-huge text-ivory text-5xl md:text-7xl mb-24 max-w-4xl">
+            Dua kata,<br />satu arah gerak.
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-16 md:gap-24">
             <div className="reveal">
-              <div className="flex items-baseline gap-6 mb-6">
-                <span className="heading-display text-5xl md:text-6xl text-primary">01</span>
-                <h3 className="heading-display text-xl md:text-2xl text-ivory">MARKAZ</h3>
+              <div className="flex items-baseline gap-4 mb-6">
+                <span className="heading-huge text-primary text-6xl">01</span>
+                <h3 className="heading-display text-3xl text-ivory">Markaz</h3>
               </div>
-              <p className="text-sm uppercase tracking-[0.3em] text-primary/80 mb-4">/مَرْكَز/ · Pusat — Arah Gerak</p>
-              <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
-                Markaz adalah <span className="text-ivory">titik orbit</span> — tempat ilmu berkumpul sebelum ia menyebar. Ia bukan sekadar bangunan, melainkan <em className="text-primary not-italic">kiblat pembelajaran</em> yang memberi arah bagi setiap langkah santri: dari mana ia berangkat, ke mana ia menuju, dan mengapa ia berjalan.
+              <p className="text-xs uppercase tracking-[0.3em] text-primary/80 mb-4">/مَرْكَز/ · Pusat</p>
+              <p className="text-muted-foreground leading-relaxed">
+                Markaz adalah <span className="text-ivory">titik orbit</span> — tempat ilmu berkumpul sebelum ia menyebar. Ia memberi arah bagi setiap langkah santri: dari mana ia berangkat, ke mana ia menuju.
               </p>
             </div>
 
+            <div className="reveal" style={{ transitionDelay: "120ms" }}>
+              <div className="flex items-baseline gap-4 mb-6">
+                <span className="heading-huge text-primary text-6xl">02</span>
+                <h3 className="heading-display text-3xl text-ivory">Rabithah</h3>
+              </div>
+              <p className="text-xs uppercase tracking-[0.3em] text-primary/80 mb-4">/رَابِطَة/ · Ikatan</p>
+              <p className="text-muted-foreground leading-relaxed">
+                Rabithah adalah <span className="text-ivory">tali yang mengikat tiga simpul</span>: santri, ulama, dan Al-Azhar. Ia menjaga transmisi ilmu tetap bersambung tanpa terputus.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PILAR MISI ========================================================== */}
+      <section id="pilar" className="py-24 md:py-40 px-6 border-t border-border/30">
+        <div className="container-brand">
+          <Eyebrow num="04">Pilar misi</Eyebrow>
+          <h2 className="reveal heading-huge text-ivory text-5xl md:text-7xl mb-20 max-w-4xl">
+            Empat pondasi,<br />satu santri utuh.
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-px bg-border/40">
+            {missions.map((m, i) => (
+              <div
+                key={m.t}
+                className="reveal group relative bg-background p-10 md:p-14 transition-colors duration-700 hover:bg-navy-light/30"
+                style={{ transitionDelay: `${i * 80}ms` }}
+              >
+                <div className="flex items-start justify-between mb-10">
+                  <span className="heading-huge text-primary text-5xl">{`0${i + 1}`}</span>
+                  <Asterisk className="w-6 h-6 text-primary/60 group-hover:text-primary group-hover:rotate-45 transition-transform duration-700" />
+                </div>
+                <h3 className="heading-display text-3xl md:text-4xl text-ivory mb-4">{m.t}</h3>
+                <p className="text-muted-foreground leading-relaxed max-w-md">{m.d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PALET WARNA ========================================================= */}
+      <section id="warna" className="py-24 md:py-40 px-6 border-t border-border/30">
+        <div className="container-brand">
+          <Eyebrow num="05">Palet warna</Eyebrow>
+          <h2 className="reveal heading-huge text-ivory text-5xl md:text-7xl mb-6 max-w-4xl">
+            Warna yang<br />berbicara.
+          </h2>
+          <p className="reveal text-muted-foreground max-w-xl mb-20 leading-relaxed">
+            Dua warna utama membawa ruh visual brand — kedalaman ilmu dan keberanian sanad.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-10">
+            {/* Navy */}
             <div className="reveal">
-              <div className="flex items-baseline gap-6 mb-6">
-                <span className="heading-display text-5xl md:text-6xl text-primary">02</span>
-                <h3 className="heading-display text-xl md:text-2xl text-ivory">RABITHAH</h3>
-              </div>
-              <p className="text-sm uppercase tracking-[0.3em] text-primary/80 mb-4">/رَابِطَة/ · Ikatan Suci</p>
-              <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
-                Rabithah adalah <span className="text-ivory">tali yang mengikat tiga simpul</span>: santri, ulama, dan Al-Azhar. Ia menjaga agar transmisi ilmu tetap bersambung — dari guru ke murid, dari generasi ke generasi — tanpa terputus oleh zaman maupun jarak.
-              </p>
-            </div>
-          </div>
-
-          {/* Right — Tarbush visual */}
-          <div className="reveal relative">
-            <div className="sticky top-32">
-              <div className="relative aspect-square bg-navy-deep border border-border/60 p-12 shadow-elegant overflow-hidden">
-                <div className="absolute inset-0 grid-lines opacity-30" />
-                <div className="absolute top-4 left-4 text-[0.6rem] tracking-[0.3em] text-muted-foreground">FIG · 01</div>
-                <div className="absolute top-4 right-4 text-[0.6rem] tracking-[0.3em] text-primary">TARBUSH · AZHAR</div>
-
-                <div className="relative h-full flex items-center justify-center text-primary">
-                  <TarbushMark className="w-48 h-48 md:w-64 md:h-64" />
+              <div className="aspect-[4/5] bg-navy-deep relative overflow-hidden border border-border/30">
+                <div className="absolute top-6 left-6 text-xs text-ivory/60">(01) Primary</div>
+                <div className="absolute bottom-8 left-8 right-8">
+                  <div className="heading-display text-3xl md:text-4xl text-ivory">Deep Navy</div>
+                  <div className="text-xs text-primary mt-2">#0A1D37</div>
                 </div>
+                <Asterisk className="absolute top-6 right-6 w-8 h-8 text-primary" />
+              </div>
+              <div className="mt-6 grid grid-cols-3 gap-4 text-xs">
+                <div><div className="text-muted-foreground mb-1">CMYK</div><div className="text-ivory font-semibold">96·80·40·55</div></div>
+                <div><div className="text-muted-foreground mb-1">RGB</div><div className="text-ivory font-semibold">10·29·55</div></div>
+                <div><div className="text-muted-foreground mb-1">PANTONE</div><div className="text-ivory font-semibold">539 C</div></div>
+              </div>
+            </div>
 
-                {/* annotation lines */}
-                <div className="absolute bottom-6 left-6 right-6 flex justify-between text-[0.6rem] tracking-[0.3em] text-muted-foreground">
-                  <span>— Mahkota ilmu</span>
-                  <span>— Santri ideal</span>
+            {/* Crimson */}
+            <div className="reveal" style={{ transitionDelay: "120ms" }}>
+              <div className="aspect-[4/5] bg-gradient-crimson relative overflow-hidden">
+                <div className="absolute top-6 left-6 text-xs text-ivory/80">(02) Accent</div>
+                <div className="absolute bottom-8 left-8 right-8">
+                  <div className="heading-display text-3xl md:text-4xl text-ivory">Crimson Tarbush</div>
+                  <div className="text-xs text-ivory/90 mt-2">#B22222</div>
                 </div>
+                <Asterisk className="absolute top-6 right-6 w-8 h-8 text-ivory" />
               </div>
-
-              <p className="mt-8 text-sm text-muted-foreground leading-relaxed max-w-md">
-                Bentuk Tarbush — simbol khas ulama Al-Azhar — menjadi <span className="text-ivory">mahkota visual</span> logo kami. Ia merepresentasikan santri ideal: tegak pendiriannya, kokoh keilmuannya, dan santun perangainya.
-              </p>
+              <div className="mt-6 grid grid-cols-3 gap-4 text-xs">
+                <div><div className="text-muted-foreground mb-1">CMYK</div><div className="text-ivory font-semibold">20·95·90·10</div></div>
+                <div><div className="text-muted-foreground mb-1">RGB</div><div className="text-ivory font-semibold">178·34·34</div></div>
+                <div><div className="text-muted-foreground mb-1">PANTONE</div><div className="text-ivory font-semibold">187 C</div></div>
+              </div>
             </div>
           </div>
-        </div>
-      </Section>
 
-      {/* PILAR MISI */}
-      <Section
-        id="misi"
-        eyebrow="Bab 02 · Pilar Misi"
-        title="Empat pondasi, satu santri utuh."
-        lead="Setiap kurikulum, setiap halaqah, setiap interaksi di Markaz Rabithah bermuara pada empat pilar ini. Keempatnya saling menopang — jika satu goyah, yang lain pun tak tegak."
-        className="bg-navy-deep/50"
-      >
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border/60">
-          {missions.map((m, i) => (
-            <div
-              key={m.title}
-              className="reveal group relative bg-navy p-10 md:p-12 transition-colors duration-700 hover:bg-navy-light cursor-default"
-              style={{ transitionDelay: `${i * 80}ms` }}
-            >
-              <div className="absolute top-6 right-6 heading-display text-[0.65rem] tracking-[0.3em] text-muted-foreground">
-                0{i + 1}
-              </div>
-              <div className="text-primary mb-8 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-[-3deg] origin-left">
-                {m.icon}
-              </div>
-              <h3 className="heading-display text-base tracking-[0.15em] text-ivory mb-4">
-                {m.title.toUpperCase()}
-              </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{m.desc}</p>
-              <div className="absolute bottom-0 left-0 h-px w-0 bg-primary transition-all duration-700 group-hover:w-full" />
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* PALET WARNA */}
-      <Section
-        id="warna"
-        eyebrow="Bab 03 · Palet Warna"
-        title="Warna yang berbicara."
-        lead="Dua warna utama membawa ruh visual brand: Deep Navy yang menandakan kedalaman ilmu dan ketenangan, Crimson yang diambil dari Tarbush Azhar — lambang keberanian sanad."
-      >
-        <div className="grid md:grid-cols-2 gap-10">
-          {/* Navy */}
-          <div className="reveal group">
-            <div className="aspect-[4/5] bg-navy-deep relative overflow-hidden border border-border/40 shadow-elegant">
-              <div className="absolute inset-0 grid-lines opacity-30" />
-              <div className="absolute top-6 left-6 text-[0.65rem] tracking-[0.3em] text-ivory/50">PRIMARY · 01</div>
-              <div className="absolute bottom-8 left-8 right-8">
-                <div className="text-[0.6rem] uppercase tracking-[0.4em] text-primary mb-2">Deep Navy Blue</div>
-                <div className="heading-display text-xl md:text-2xl text-ivory">Azhary Depth</div>
-              </div>
-            </div>
-            <div className="mt-6 grid grid-cols-2 gap-6 text-xs">
-              <div>
-                <div className="text-muted-foreground uppercase tracking-[0.2em] mb-2">HEX</div>
-                <div className="heading-display text-ivory text-base tracking-[0.15em]">#0A1D37</div>
-              </div>
-              <div>
-                <div className="text-muted-foreground uppercase tracking-[0.2em] mb-2">CMYK</div>
-                <div className="heading-display text-ivory text-base tracking-[0.15em]">96 · 80 · 40 · 55</div>
-              </div>
-              <div>
-                <div className="text-muted-foreground uppercase tracking-[0.2em] mb-2">RGB</div>
-                <div className="heading-display text-ivory text-base tracking-[0.15em]">10 · 29 · 55</div>
-              </div>
-              <div>
-                <div className="text-muted-foreground uppercase tracking-[0.2em] mb-2">PANTONE</div>
-                <div className="heading-display text-ivory text-base tracking-[0.15em]">539 C</div>
-              </div>
-            </div>
-            <p className="mt-6 text-sm text-muted-foreground leading-relaxed max-w-sm">
-              Melambangkan kedalaman, ketenangan malam saat para ulama menelaah kitab, dan kesungguhan yang tak bising.
-            </p>
-          </div>
-
-          {/* Crimson */}
-          <div className="reveal group" style={{ transitionDelay: "120ms" }}>
-            <div className="aspect-[4/5] bg-gradient-crimson relative overflow-hidden shadow-crimson">
-              <div className="absolute inset-0 grid-lines opacity-20" />
-              <div className="absolute top-6 left-6 text-[0.65rem] tracking-[0.3em] text-ivory/70">ACCENT · 02</div>
-              <div className="absolute bottom-8 left-8 right-8">
-                <div className="text-[0.6rem] uppercase tracking-[0.4em] text-ivory/80 mb-2">Crimson Tarbush</div>
-                <div className="heading-display text-xl md:text-2xl text-ivory">Sanad Red</div>
-              </div>
-            </div>
-            <div className="mt-6 grid grid-cols-2 gap-6 text-xs">
-              <div>
-                <div className="text-muted-foreground uppercase tracking-[0.2em] mb-2">HEX</div>
-                <div className="heading-display text-ivory text-base tracking-[0.15em]">#B22222</div>
-              </div>
-              <div>
-                <div className="text-muted-foreground uppercase tracking-[0.2em] mb-2">CMYK</div>
-                <div className="heading-display text-ivory text-base tracking-[0.15em]">20 · 95 · 90 · 10</div>
-              </div>
-              <div>
-                <div className="text-muted-foreground uppercase tracking-[0.2em] mb-2">RGB</div>
-                <div className="heading-display text-ivory text-base tracking-[0.15em]">178 · 34 · 34</div>
-              </div>
-              <div>
-                <div className="text-muted-foreground uppercase tracking-[0.2em] mb-2">PANTONE</div>
-                <div className="heading-display text-ivory text-base tracking-[0.15em]">187 C</div>
-              </div>
-            </div>
-            <p className="mt-6 text-sm text-muted-foreground leading-relaxed max-w-sm">
-              Diambil dari warna Tarbush para ulama Azhar — keberanian menyampaikan kebenaran dan kehangatan ikatan santri-guru.
-            </p>
-          </div>
-        </div>
-
-        {/* Supporting neutrals strip */}
-        <div className="reveal mt-16 border border-border/40">
-          <div className="grid grid-cols-4">
+          {/* Support swatches */}
+          <div className="reveal mt-16 grid grid-cols-4 border border-border/30">
             {[
               { name: "Ivory", hex: "#F4EEE4", bg: "bg-ivory", text: "text-navy-deep" },
               { name: "Navy Light", hex: "#1B3356", bg: "bg-navy-light", text: "text-ivory" },
               { name: "Muted", hex: "#2A3F5F", bg: "bg-muted", text: "text-ivory" },
-              { name: "Gold Accent", hex: "#D4B87A", bg: "bg-gold", text: "text-navy-deep" },
+              { name: "Gold", hex: "#D4B87A", bg: "bg-gold", text: "text-navy-deep" },
             ].map((c) => (
-              <div key={c.name} className={`${c.bg} ${c.text} p-6 aspect-square md:aspect-auto md:h-32 flex flex-col justify-between`}>
-                <div className="text-[0.55rem] tracking-[0.3em] uppercase opacity-70">Support</div>
+              <div key={c.name} className={`${c.bg} ${c.text} p-6 h-32 flex flex-col justify-between`}>
+                <div className="text-[0.6rem] uppercase opacity-70">Support</div>
                 <div>
-                  <div className="heading-display text-[0.7rem] tracking-[0.2em]">{c.name.toUpperCase()}</div>
+                  <div className="font-bold text-sm">{c.name}</div>
                   <div className="text-xs mt-1 opacity-80">{c.hex}</div>
                 </div>
               </div>
             ))}
           </div>
         </div>
-      </Section>
+      </section>
 
-      {/* TIPOGRAFI */}
-      <Section
-        id="tipografi"
-        eyebrow="Bab 04 · Tipografi"
-        title="Geometos — fondasi yang terlihat."
-        lead="Font display kami dipilih bukan karena keindahannya semata, melainkan karena bentuknya. Setiap huruf dibangun dari geometri murni — garis tegas, sudut presisi, proporsi terukur — menggemakan Ilmu Alat yang menjadi pondasi setiap santri."
-        className="bg-navy-deep/40"
-      >
-        {/* Showcase huge letter */}
-        <div className="reveal relative border border-border/40 bg-navy p-10 md:p-20 overflow-hidden mb-16">
-          <div className="absolute inset-0 grid-lines opacity-20" />
-          <div className="absolute top-6 left-6 text-[0.6rem] tracking-[0.3em] text-muted-foreground">SPECIMEN · GEOMETOS BOLD</div>
-          <div className="absolute top-6 right-6 text-[0.6rem] tracking-[0.3em] text-primary">100 PT</div>
+      {/* TIPOGRAFI =========================================================== */}
+      <section id="tipografi" className="py-24 md:py-40 px-6 border-t border-border/30">
+        <div className="container-brand">
+          <Eyebrow num="06">Tipografi</Eyebrow>
+          <h2 className="reveal heading-huge text-ivory text-5xl md:text-7xl mb-20 max-w-4xl">
+            Geometos —<br />fondasi terlihat.
+          </h2>
 
-          <div className="relative heading-display text-[18vw] md:text-[14rem] leading-none text-ivory text-center">
-            M<span className="text-primary">R</span>
-          </div>
-
-          <div className="relative mt-8 grid grid-cols-3 text-center text-[0.6rem] tracking-[0.3em] text-muted-foreground">
-            <span>Geometric</span>
-            <span>Bold · Clean</span>
-            <span>Monumental</span>
-          </div>
-        </div>
-
-        {/* Alphabet */}
-        <div className="reveal border border-border/40 bg-navy p-10 md:p-16 mb-10">
-          <div className="text-[0.6rem] tracking-[0.3em] text-primary mb-8">ABECEDARIUM · A–Z</div>
-          <div className="heading-display text-xl md:text-3xl text-ivory tracking-[0.25em] leading-relaxed break-words">
-            ABCDEFGHIJKLM<br />NOPQRSTUVWXYZ
-          </div>
-          <div className="mt-10 text-[0.6rem] tracking-[0.3em] text-primary mb-6">NUMERALS · 0–9</div>
-          <div className="heading-display text-xl md:text-3xl text-muted-foreground tracking-[0.3em]">
-            0 1 2 3 4 5 6 7 8 9
-          </div>
-        </div>
-
-        {/* Size scale */}
-        <div className="reveal space-y-10 border-t border-border/40 pt-16">
-          <div className="grid grid-cols-12 gap-6 items-baseline border-b border-border/30 pb-8">
-            <div className="col-span-2 text-[0.6rem] tracking-[0.3em] text-muted-foreground">72 PT · DISPLAY</div>
-            <div className="col-span-10 heading-display text-3xl md:text-6xl text-ivory tracking-[0.1em]">
-              MARKAZ RABITHAH
+          {/* Giant MR specimen */}
+          <div className="reveal relative border border-border/30 p-10 md:p-16 mb-12 overflow-hidden">
+            <div className="absolute top-4 left-4 text-xs text-primary">(specimen) 280pt</div>
+            <div className="absolute top-4 right-4 text-xs text-muted-foreground">Geometos / Bold</div>
+            <div className="heading-huge text-[24vw] md:text-[16rem] leading-none text-ivory text-center">
+              M<span className="text-primary">R</span>
             </div>
           </div>
-          <div className="grid grid-cols-12 gap-6 items-baseline border-b border-border/30 pb-8">
-            <div className="col-span-2 text-[0.6rem] tracking-[0.3em] text-muted-foreground">48 PT · TITLE</div>
-            <div className="col-span-10 heading-display text-2xl md:text-4xl text-ivory tracking-[0.12em]">
-              BERMANHAJ AZHARY
+
+          {/* Alphabet */}
+          <div className="reveal border border-border/30 p-10 md:p-14 mb-12">
+            <div className="text-xs text-primary mb-6">(abecedarium) A–Z · 0–9</div>
+            <div className="heading-display text-2xl md:text-4xl text-ivory tracking-tight leading-tight">
+              ABCDEFGHIJKLM<br />NOPQRSTUVWXYZ
+            </div>
+            <div className="heading-display text-2xl md:text-4xl text-muted-foreground mt-8">
+              0 1 2 3 4 5 6 7 8 9
             </div>
           </div>
-          <div className="grid grid-cols-12 gap-6 items-baseline border-b border-border/30 pb-8">
-            <div className="col-span-2 text-[0.6rem] tracking-[0.3em] text-muted-foreground">24 PT · SUBTITLE</div>
-            <div className="col-span-10 heading-display text-lg md:text-2xl text-primary tracking-[0.18em]">
-              MARKAZ RABITHAH BERMANHAJ AZHARY
-            </div>
-          </div>
-          <div className="grid grid-cols-12 gap-6 items-baseline">
-            <div className="col-span-2 text-[0.6rem] tracking-[0.3em] text-muted-foreground">14 PT · CAPTION</div>
-            <div className="col-span-10 heading-display text-sm text-muted-foreground tracking-[0.25em]">
-              MARKAZ RABITHAH BERMANHAJ AZHARY
-            </div>
-          </div>
-        </div>
 
-        {/* Pairing */}
-        <div className="reveal mt-20 grid md:grid-cols-2 gap-10">
-          <div className="border border-border/40 p-10 bg-navy">
-            <div className="text-[0.6rem] tracking-[0.3em] text-primary mb-6">PRIMARY · DISPLAY</div>
-            <div className="heading-display text-4xl text-ivory mb-4">Geometos</div>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Untuk judul, logotype, dan elemen monumental. Bentuk geometrisnya mencerminkan fondasi Ilmu Alat — presisi, struktur, dan kekokohan.
-            </p>
-          </div>
-          <div className="border border-border/40 p-10 bg-navy">
-            <div className="text-[0.6rem] tracking-[0.3em] text-primary mb-6">SECONDARY · BODY</div>
-            <div className="font-sans text-4xl text-ivory mb-4 font-light">Inter</div>
-            <p className="text-sm text-muted-foreground leading-relaxed font-sans">
-              Untuk teks panjang, narasi, dan materi edukasi. Bersih, mudah dibaca, dan menjadi latar yang tenang bagi Geometos.
-            </p>
-          </div>
-        </div>
-      </Section>
-
-      {/* CLOSING */}
-      <section className="py-32 md:py-48 border-t border-border/40 bg-gradient-hero relative overflow-hidden">
-        <div className="absolute inset-0 grid-lines opacity-30" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-crimson/10 blur-[120px]" />
-
-        <div className="container-brand max-w-3xl text-center relative">
-          <div className="reveal eyebrow justify-center mb-10 before:mx-auto">Epilog</div>
-          <p className="reveal heading-serif text-3xl md:text-5xl text-ivory leading-[1.2] mb-12">
-            “Setiap simbol, warna, dan huruf dalam identitas ini adalah <em className="text-primary not-italic">janji</em> — bahwa ilmu yang diwariskan akan kami jaga sebagaimana para ulama Azhar menjaganya.”
-          </p>
-          <div className="reveal flex items-center justify-center gap-4 text-[0.65rem] tracking-[0.4em] text-muted-foreground">
-            <span className="h-px w-12 bg-primary" />
-            <span>MARKAZ RABITHAH · 2026</span>
-            <span className="h-px w-12 bg-primary" />
+          {/* Scale */}
+          <div className="reveal space-y-8 border-t border-border/30 pt-12">
+            {[
+              { size: "72pt", label: "Display", cls: "text-4xl md:text-7xl text-ivory", text: "Markaz Rabithah" },
+              { size: "48pt", label: "Title", cls: "text-3xl md:text-5xl text-ivory", text: "Bermanhaj Azhary" },
+              { size: "24pt", label: "Subtitle", cls: "text-xl md:text-3xl text-primary", text: "Markaz Rabithah bermanhaj Azhary" },
+              { size: "14pt", label: "Caption", cls: "text-sm md:text-base text-muted-foreground", text: "Markaz Rabithah bermanhaj Azhary" },
+            ].map((r) => (
+              <div key={r.size} className="grid grid-cols-12 gap-6 items-baseline border-b border-border/20 pb-6">
+                <div className="col-span-3 md:col-span-2 text-xs text-muted-foreground">
+                  <div className="text-primary">{r.size}</div>
+                  <div>{r.label}</div>
+                </div>
+                <div className={`col-span-9 md:col-span-10 heading-display ${r.cls}`}>{r.text}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* CLOSING ============================================================= */}
+      <section className="py-32 md:py-48 px-6 border-t border-border/30 relative overflow-hidden">
+        <div className="container-brand max-w-4xl text-center relative">
+          <Asterisk className="w-12 h-12 text-primary mx-auto mb-10 reveal" />
+          <p className="reveal heading-huge text-ivory text-4xl md:text-6xl leading-[1.05] mb-12">
+            Ilmu yang diwariskan<br />
+            akan <em className="text-primary not-italic">kami jaga</em>.
+          </p>
+          <div className="reveal text-sm text-muted-foreground">Markaz Rabithah · Brand Guideline 2026</div>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="border-t border-border/40 py-10">
-        <div className="container-brand flex flex-col md:flex-row items-center justify-between gap-4 text-[0.65rem] tracking-[0.3em] text-muted-foreground uppercase">
+      <footer className="border-t border-border/30 py-8 px-6">
+        <div className="container-brand flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
           <span>© 2026 Markaz Rabithah</span>
-          <span>Brand Guideline · Version 01</span>
+          <span>Brand Guideline · v01</span>
           <span>Kokoh · Terjaga · Luhur</span>
         </div>
       </footer>
