@@ -200,7 +200,7 @@ const Index = () => {
       <Nav />
 
       {/* LOGO HERO (splash) ================================================ */}
-      <section className="relative h-[60vh] min-h-[380px] md:h-auto md:min-h-screen flex items-center justify-center px-4 md:px-6 overflow-hidden pt-20 md:pt-0">
+      <section className="relative min-h-screen flex items-center justify-center px-4 md:px-6 overflow-hidden pt-20 md:pt-0">
         {/* decorative grid */}
         <div
           aria-hidden
@@ -211,13 +211,8 @@ const Index = () => {
             backgroundSize: "80px 80px",
           }}
         />
-        <div
-          aria-hidden
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] md:w-[640px] md:h-[640px] rounded-full opacity-20 blur-3xl"
-          style={{ backgroundColor: "hsl(var(--primary))" }}
-        />
 
-        <div className="reveal relative w-[220px] md:w-full md:max-w-md mx-auto aspect-square flex items-center justify-center">
+        <div className="reveal relative w-[260px] md:w-full md:max-w-md mx-auto aspect-square flex items-center justify-center">
           <div className="absolute inset-4 md:inset-10 rounded-full border border-ivory/10" />
           <div className="absolute inset-10 md:inset-24 rounded-full border border-ivory/10" />
           <img
