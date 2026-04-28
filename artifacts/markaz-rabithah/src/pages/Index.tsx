@@ -770,9 +770,44 @@ const Index = () => {
       <section id="identitas" className="py-12 md:py-32 px-4 md:px-6">
         <div className="container-brand max-w-6xl mx-auto">
           <Eyebrow num="05">Identitas Visual</Eyebrow>
-          <h2 className="reveal font-display font-extrabold text-2xl md:text-6xl leading-[1.05] text-ivory max-w-3xl mb-8 md:mb-16">
+          <h2 className="reveal font-display font-extrabold text-2xl md:text-6xl leading-[1.05] text-ivory max-w-3xl mb-6 md:mb-10">
             Bahasa visual <span className="text-primary">yang jujur.</span>
           </h2>
+
+          {/* Download Assets CTA */}
+          <div className="reveal mb-8 md:mb-14">
+            <a
+              href="https://drive.google.com/drive/folders/1V5eahQZpSaXwpekZ7RcK6ZRRNwHjVw1V?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 p-4 md:p-6 bg-primary hover:bg-primary/90 border border-primary text-ivory transition-all hover:shadow-[0_10px_40px_-10px_rgba(178,34,34,0.6)]"
+            >
+              <div className="flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full bg-ivory/15 group-hover:bg-ivory/25 transition-colors shrink-0">
+                <svg viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M7 10l5 5 5-5" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M12 15V3" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.3em] text-ivory/75 mb-1">
+                  Brand Asset Pack
+                </div>
+                <div className="font-display font-extrabold text-lg md:text-2xl leading-tight">
+                  Download Aset Brand Lengkap
+                </div>
+                <div className="text-[0.7rem] md:text-sm text-ivory/80 mt-1 md:mt-1.5 leading-relaxed">
+                  Logo (PNG, SVG), palet warna, font Sk Modernist & Qahwa Arabic — semua tersedia di Google Drive.
+                </div>
+              </div>
+              <div className="flex items-center gap-2 text-[0.65rem] md:text-xs uppercase tracking-[0.25em] font-semibold border border-ivory/30 group-hover:border-ivory rounded-full px-4 py-2.5 md:px-5 md:py-3 shrink-0 self-stretch md:self-auto justify-center transition-colors">
+                <span>Buka Drive</span>
+                <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+                  <path d="M7 17L17 7M9 7h8v8" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            </a>
+          </div>
 
           <div className="mb-8 md:mb-12">
             <button
