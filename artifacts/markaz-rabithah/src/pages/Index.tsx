@@ -269,22 +269,6 @@ const Index = () => {
 
       {/* HERO ============================================================== */}
       <section className="relative md:min-h-screen flex items-center pt-12 pb-14 md:pt-32 md:pb-28 px-4 md:px-6 border-t border-ivory/10">
-        {/* decorative background */}
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-[0.06] pointer-events-none"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, rgba(244,238,228,0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(244,238,228,0.4) 1px, transparent 1px)",
-            backgroundSize: "80px 80px",
-          }}
-        />
-        <div
-          aria-hidden
-          className="absolute -top-32 -right-32 w-[480px] h-[480px] rounded-full opacity-25 blur-3xl"
-          style={{ backgroundColor: "hsl(var(--primary))" }}
-        />
-
         <div className="container-brand max-w-6xl mx-auto relative grid md:grid-cols-12 gap-8 md:gap-16 items-center">
           <div className="md:col-span-7">
             <h1 className="reveal font-display font-extrabold text-3xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight mb-4 md:mb-6">
@@ -298,24 +282,6 @@ const Index = () => {
               asy-Syarif — memadukan tradisi keilmuan klasik bersanad dengan
               pendampingan modern yang adaptif untuk santri Indonesia.
             </p>
-
-            <div className="reveal flex flex-wrap items-center gap-3 md:gap-4">
-              <a
-                href="#kontak"
-                className="inline-flex items-center gap-2 px-4 md:px-7 py-2.5 md:py-3.5 bg-primary hover:bg-primary/90 text-ivory text-[0.65rem] md:text-sm uppercase tracking-[0.2em] md:tracking-[0.25em] font-semibold rounded-sm transition-colors"
-              >
-                Daftar Santri
-                <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </a>
-              <a
-                href="#filosofi"
-                className="inline-flex items-center gap-2 px-4 md:px-7 py-2.5 md:py-3.5 border border-ivory/20 hover:border-primary hover:text-primary text-ivory/85 text-[0.65rem] md:text-sm uppercase tracking-[0.2em] md:tracking-[0.25em] font-semibold rounded-sm transition-colors"
-              >
-                Pelajari filosofi
-              </a>
-            </div>
           </div>
 
           <div className="md:col-span-5 relative">
