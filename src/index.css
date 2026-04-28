@@ -9,7 +9,7 @@
 @layer base {
   :root {
     /* Deep Navy Blue #0A1D37 base */
-    --background: 215 70% 13%;
+    --background: 215 60% 7%;
     --foreground: 40 30% 94%;
 
     --card: 215 65% 16%;
