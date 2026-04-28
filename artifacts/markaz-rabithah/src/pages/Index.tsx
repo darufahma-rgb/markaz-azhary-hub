@@ -200,7 +200,7 @@ const Index = () => {
       <Nav />
 
       {/* LOGO HERO (splash) ================================================ */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 md:px-6 overflow-hidden">
+      <section className="relative h-[60vh] min-h-[380px] md:h-auto md:min-h-screen flex items-center justify-center px-4 md:px-6 overflow-hidden pt-20 md:pt-0">
         {/* decorative grid */}
         <div
           aria-hidden
@@ -213,34 +213,34 @@ const Index = () => {
         />
         <div
           aria-hidden
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[640px] h-[640px] rounded-full opacity-20 blur-3xl"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[320px] md:w-[640px] md:h-[640px] rounded-full opacity-20 blur-3xl"
           style={{ backgroundColor: "hsl(var(--primary))" }}
         />
 
-        <div className="reveal relative w-full max-w-md mx-auto aspect-square flex items-center justify-center">
-          <div className="absolute inset-6 md:inset-10 rounded-full border border-ivory/10" />
-          <div className="absolute inset-16 md:inset-24 rounded-full border border-ivory/10" />
+        <div className="reveal relative w-[220px] md:w-full md:max-w-md mx-auto aspect-square flex items-center justify-center">
+          <div className="absolute inset-4 md:inset-10 rounded-full border border-ivory/10" />
+          <div className="absolute inset-10 md:inset-24 rounded-full border border-ivory/10" />
           <img
             src={logoMark}
             alt="Markaz Rabithah"
             className="relative w-3/5 h-auto object-contain drop-shadow-[0_0_40px_rgba(178,34,34,0.25)]"
           />
           <div className="absolute -top-2 -left-2 text-primary">
-            <PlusMark className="w-5 h-5" />
+            <PlusMark className="w-3.5 h-3.5 md:w-5 md:h-5" />
           </div>
           <div className="absolute -top-2 -right-2 text-primary">
-            <PlusMark className="w-5 h-5" />
+            <PlusMark className="w-3.5 h-3.5 md:w-5 md:h-5" />
           </div>
           <div className="absolute -bottom-2 -left-2 text-primary">
-            <PlusMark className="w-5 h-5" />
+            <PlusMark className="w-3.5 h-3.5 md:w-5 md:h-5" />
           </div>
           <div className="absolute -bottom-2 -right-2 text-primary">
-            <PlusMark className="w-5 h-5" />
+            <PlusMark className="w-3.5 h-3.5 md:w-5 md:h-5" />
           </div>
         </div>
 
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-primary animate-slow-pulse">
-          <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <div className="absolute bottom-4 md:bottom-6 left-1/2 -translate-x-1/2 text-primary animate-slow-pulse">
+          <svg viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" strokeWidth="1.5">
             <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
