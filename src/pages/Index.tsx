@@ -86,23 +86,23 @@ const Index = () => {
       <SideLabel top="78%" letter="A." word="Azhary" />
 
       {/* HERO ================================================================ */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center px-6">
+      <section className="relative min-h-screen flex flex-col items-center justify-center px-4 md:px-6">
         <div ref={heroRef} className="relative z-10 flex flex-col items-center">
-          <div className="flex items-center gap-6 md:gap-10">
+          <div className="flex items-center gap-3 md:gap-10">
             <img
               src={logo}
               alt="Markaz Rabithah logo"
-              className="w-20 md:w-28 h-auto"
+              className="w-12 md:w-28 h-auto"
             />
-            <h1 className="heading-huge text-ivory text-5xl md:text-7xl">
-              markaz<br />rabithah<sup className="text-primary text-2xl md:text-3xl align-top ml-1">®</sup>
+            <h1 className="heading-huge text-ivory text-3xl md:text-7xl">
+              markaz<br />rabithah<sup className="text-primary text-base md:text-3xl align-top ml-1">®</sup>
             </h1>
           </div>
         </div>
 
         {/* scroll chevron */}
-        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 text-primary animate-slow-pulse">
-          <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <div className="absolute bottom-16 md:bottom-24 left-1/2 -translate-x-1/2 text-primary animate-slow-pulse">
+          <svg viewBox="0 0 24 24" className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" strokeWidth="1.5">
             <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
