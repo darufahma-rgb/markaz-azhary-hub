@@ -200,37 +200,43 @@ const Index = () => {
   ];
 
   return (
-    <main id="top" className="relative bg-background text-ivory overflow-x-hidden">
+    <main id="top" className="relative text-ivory overflow-x-hidden" style={{ backgroundColor: "hsl(var(--navy-deep))" }}>
+      {/* GLOBAL ELEGANT AMBIENT BACKGROUND ================================== */}
+      <div
+        aria-hidden
+        className="fixed inset-0 -z-10 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 90% 60% at 50% -10%, hsl(215 55% 19%) 0%, transparent 55%)," +
+            "radial-gradient(ellipse 60% 50% at 110% 35%, hsl(0 55% 22% / 0.22) 0%, transparent 60%)," +
+            "radial-gradient(ellipse 70% 50% at -10% 70%, hsl(40 50% 70% / 0.05) 0%, transparent 55%)," +
+            "radial-gradient(ellipse 70% 60% at 50% 110%, hsl(215 60% 16%) 0%, transparent 55%)," +
+            "linear-gradient(180deg, hsl(215 70% 11%) 0%, hsl(var(--navy-deep)) 50%, hsl(215 75% 9%) 100%)",
+        }}
+      />
+      {/* edge vignette */}
+      <div
+        aria-hidden
+        className="fixed inset-0 -z-10 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, transparent 55%, hsl(215 80% 5% / 0.85) 100%)",
+        }}
+      />
+      {/* subtle film grain via repeating noise SVG */}
+      <div
+        aria-hidden
+        className="fixed inset-0 -z-10 pointer-events-none opacity-[0.04] mix-blend-overlay"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
+        }}
+      />
+
       <Nav />
 
       {/* LOGO HERO (splash) ================================================ */}
-      <section
-        className="relative min-h-screen flex items-center justify-center px-4 md:px-6 overflow-hidden pt-20 md:pt-0"
-        style={{
-          background:
-            "radial-gradient(ellipse at 50% 35%, hsl(215 55% 18%) 0%, hsl(var(--navy)) 45%, hsl(var(--navy-deep)) 100%)",
-        }}
-      >
-        {/* faint warm ivory wash */}
-        <div
-          aria-hidden
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(circle at 50% 50%, rgba(212,184,122,0.05) 0%, transparent 60%)",
-          }}
-        />
-
-        {/* vignette */}
-        <div
-          aria-hidden
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, transparent 50%, hsl(var(--navy-deep) / 0.85) 100%)",
-          }}
-        />
-
+      <section className="relative min-h-screen flex items-center justify-center px-4 md:px-6 overflow-hidden pt-20 md:pt-0">
         <div className="reveal relative w-[260px] md:w-full md:max-w-md mx-auto aspect-square flex items-center justify-center">
           <div className="absolute inset-4 md:inset-10 rounded-full border border-ivory/10" />
           <div className="absolute inset-10 md:inset-24 rounded-full border border-ivory/10" />
@@ -268,7 +274,7 @@ const Index = () => {
       </section>
 
       {/* HERO ============================================================== */}
-      <section className="relative md:min-h-screen flex items-center pt-12 pb-14 md:pt-32 md:pb-28 px-4 md:px-6 border-t border-ivory/10">
+      <section className="relative md:min-h-screen flex items-center pt-12 pb-14 md:pt-32 md:pb-28 px-4 md:px-6">
         <div className="container-brand max-w-6xl mx-auto relative grid md:grid-cols-12 gap-8 md:gap-16 items-center">
           <div className="md:col-span-7">
             <h1 className="reveal font-display font-extrabold text-3xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tight mb-4 md:mb-6">
@@ -319,7 +325,7 @@ const Index = () => {
       </section>
 
       {/* TENTANG =========================================================== */}
-      <section id="tentang" className="py-12 md:py-32 px-4 md:px-6 border-t border-ivory/10">
+      <section id="tentang" className="py-12 md:py-32 px-4 md:px-6">
         <div className="container-brand max-w-6xl mx-auto grid md:grid-cols-12 gap-6 md:gap-16">
           <div className="md:col-span-5">
             <Eyebrow num="01">Tentang Kami</Eyebrow>
@@ -377,7 +383,7 @@ const Index = () => {
       </section>
 
       {/* FILOSOFI ========================================================== */}
-      <section id="filosofi" className="py-12 md:py-32 px-4 md:px-6 border-t border-ivory/10 relative">
+      <section id="filosofi" className="py-12 md:py-32 px-4 md:px-6 relative">
         <div
           aria-hidden
           className="absolute right-0 top-0 bottom-0 w-1/2 opacity-[0.04] pointer-events-none"
@@ -460,7 +466,7 @@ const Index = () => {
       </section>
 
       {/* PILAR MISI ======================================================== */}
-      <section id="pilar" className="py-12 md:py-32 px-4 md:px-6 border-t border-ivory/10">
+      <section id="pilar" className="py-12 md:py-32 px-4 md:px-6">
         <div className="container-brand max-w-6xl mx-auto">
           <Eyebrow num="03">Pilar Misi</Eyebrow>
           <h2 className="reveal font-display font-extrabold text-2xl md:text-6xl leading-[1.05] text-ivory max-w-3xl mb-8 md:mb-16">
@@ -496,7 +502,7 @@ const Index = () => {
       </section>
 
       {/* PROGRAM =========================================================== */}
-      <section id="program" className="py-12 md:py-32 px-4 md:px-6 border-t border-ivory/10">
+      <section id="program" className="py-12 md:py-32 px-4 md:px-6">
         <div className="container-brand max-w-6xl mx-auto">
           <Eyebrow num="04">Program Pembelajaran</Eyebrow>
           <h2 className="reveal font-display font-extrabold text-2xl md:text-6xl leading-[1.05] text-ivory max-w-3xl mb-8 md:mb-16">
@@ -526,7 +532,7 @@ const Index = () => {
       </section>
 
       {/* IDENTITAS VISUAL ================================================== */}
-      <section id="identitas" className="py-12 md:py-32 px-4 md:px-6 border-t border-ivory/10">
+      <section id="identitas" className="py-12 md:py-32 px-4 md:px-6">
         <div className="container-brand max-w-6xl mx-auto">
           <Eyebrow num="05">Identitas Visual</Eyebrow>
           <h2 className="reveal font-display font-extrabold text-2xl md:text-6xl leading-[1.05] text-ivory max-w-3xl mb-8 md:mb-16">
@@ -594,13 +600,8 @@ const Index = () => {
       {/* CTA / KONTAK ====================================================== */}
       <section
         id="kontak"
-        className="py-12 md:py-32 px-4 md:px-6 border-t border-ivory/10 relative overflow-hidden"
+        className="py-12 md:py-32 px-4 md:px-6 relative overflow-hidden"
       >
-        <div
-          aria-hidden
-          className="absolute -bottom-32 -left-32 w-[480px] h-[480px] rounded-full opacity-20 blur-3xl"
-          style={{ backgroundColor: "hsl(var(--primary))" }}
-        />
         <div className="container-brand max-w-4xl mx-auto text-center relative">
           <div className="reveal text-primary mb-4 md:mb-6 flex justify-center">
             <PlusMark className="w-5 h-5 md:w-7 md:h-7" />
@@ -636,7 +637,7 @@ const Index = () => {
             </a>
           </div>
 
-          <div className="reveal mt-10 md:mt-16 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-10 text-left max-w-3xl mx-auto pt-6 md:pt-10 border-t border-ivory/10">
+          <div className="reveal mt-10 md:mt-16 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-10 text-left max-w-3xl mx-auto pt-6 md:pt-10">
             <div>
               <div className="text-[0.6rem] md:text-[0.65rem] uppercase tracking-[0.3em] text-ivory/50 mb-1.5 md:mb-2">Studio</div>
               <div className="text-xs md:text-sm text-ivory/85 font-medium">SYMP Studio</div>
