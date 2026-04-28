@@ -5,24 +5,17 @@ import path from "path";
 export default defineConfig(({ command }) => {
   const isServe = command === "serve";
 
-  // Dev server only — required so Replit workflow knows the bound port.
-  // For production builds (e.g. on Vercel) PORT is irrelevant.
   let port = 5173;
   if (isServe) {
     const rawPort = process.env.PORT;
-    if (!rawPort) {
-      throw new Error(
-        "PORT environment variable is required for the dev server.",
-      );
+    if (rawPort) {
+      const parsed = Number(rawPort);
+      if (!Number.isNaN(parsed) && parsed > 0) {
+        port = parsed;
+      }
     }
-    const parsed = Number(rawPort);
-    if (Number.isNaN(parsed) || parsed <= 0) {
-      throw new Error(`Invalid PORT value: "${rawPort}"`);
-    }
-    port = parsed;
   }
 
-  // Public base path. Defaults to "/" so production builds work without env.
   const basePath = process.env.BASE_PATH || "/";
 
   return {
@@ -31,7 +24,7 @@ export default defineConfig(({ command }) => {
     resolve: {
       alias: {
         "@": path.resolve(import.meta.dirname, "src"),
-        "@assets": path.resolve(import.meta.dirname, "..", "..", "attached_assets"),
+        "@assets": path.resolve(import.meta.dirname, "attached_assets"),
       },
       dedupe: ["react", "react-dom"],
     },
@@ -45,9 +38,6 @@ export default defineConfig(({ command }) => {
       strictPort: true,
       host: "0.0.0.0",
       allowedHosts: true,
-      fs: {
-        strict: true,
-      },
     },
     preview: {
       port,
