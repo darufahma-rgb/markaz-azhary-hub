@@ -131,7 +131,7 @@ const SiteNav = () => {
         >
           <span
             aria-hidden
-            className={`absolute h-[2px] w-5 bg-current rounded-full transition-all duration-300 ease-[cubic-bezier(0.65,0,0.35,1)] ${
+            className={`absolute h-[2px] w-5 bg-current rounded-full transition-all duration-300 ease-snappy ${
               open ? "rotate-45 translate-y-0" : "-translate-y-[6px]"
             }`}
           />
@@ -143,7 +143,7 @@ const SiteNav = () => {
           />
           <span
             aria-hidden
-            className={`absolute h-[2px] w-5 bg-current rounded-full transition-all duration-300 ease-[cubic-bezier(0.65,0,0.35,1)] ${
+            className={`absolute h-[2px] w-5 bg-current rounded-full transition-all duration-300 ease-snappy ${
               open ? "-rotate-45 translate-y-0" : "translate-y-[6px]"
             }`}
           />
@@ -152,7 +152,7 @@ const SiteNav = () => {
 
       {/* Mobile menu — animated open/close */}
       <div
-        className={`md:hidden mt-2 mx-auto max-w-5xl overflow-hidden transition-[max-height,opacity,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        className={`md:hidden mt-2 mx-auto max-w-5xl overflow-hidden transition-[max-height,opacity,transform] duration-500 ease-smooth ${
           open
             ? "max-h-[480px] opacity-100 translate-y-0"
             : "max-h-0 opacity-0 -translate-y-2 pointer-events-none"
