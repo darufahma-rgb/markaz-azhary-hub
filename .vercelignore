@@ -6,7 +6,7 @@ attached_assets/
 screenshots/
 artifacts/api-server/
 artifacts/mockup-sandbox/
-lib/
+/lib/
 scripts/
 *.py
 *.pyc
